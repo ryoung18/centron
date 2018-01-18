@@ -1,0 +1,8 @@
+.product-images {
+  border: 1px solid gray;
+  height: 50%;
+  width: 100%;
+  overflow: hidden;
+  border-radius: .4em;
+  margin: auto;
+}
