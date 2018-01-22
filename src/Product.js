@@ -1,8 +1,8 @@
-import React,  { Component } from 'react';
+import React from 'react';
 import './Product.css';
 
 const Product = () => (
-  <div className="outer-container z10 slide-up">
+  <div className="outer-container z10 slide-up hide">
     <div className="menu">
       <a href="https://www.amazon.com/Centron-Adjustable-Clavicle-Shoulder/dp/B0116OQSNG/ref=lp_13672226011_1_9_a_it?srs=13672226011&ie=UTF8&qid=1514101680&sr=8-9" className="space w50"> <h2> Amazon $12 </h2> </a>
 
@@ -13,7 +13,7 @@ const Product = () => (
 
        <div className="inner-container inner-padding">
           <div className="product-images">
-            <img src="https://i.ebayimg.com/images/g/kWYAAOSwYmZXI9kt/s-l1600.jpg" />
+            <img src="https://i.ebayimg.com/images/g/kWYAAOSwYmZXI9kt/s-l1600.jpg" alt='clavicl brace'/>
           </div>
           <div className="product-title-scroll">
             <p> Clavicle Strap Shoulder Support Brace </p>

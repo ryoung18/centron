@@ -71,6 +71,7 @@
 
   .btns-hidden-container p {
     margin: .5em;
+    white-space: nowrap;
   }
 
   .slide-indicator {
@@ -220,4 +221,15 @@ animation:
   margin-top: 5em;
   margin-bottom: 5em;
 
+}
+
+
+.text-left {
+  text-align: left;
+}
+
+.space h2 {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }

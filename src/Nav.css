@@ -21,14 +21,21 @@ nav {
         align-self: center;
       }
 
-      .navbar-items > li > img {
-        width: 2em;
-        height: 2em;
-        padding:.2em;
+      .navbar-items > li  img {
+        width: 1.9em;
+        height: 1.9em;
+        padding: .2em;
       }
 
-      .circle-btn {
+      .navbar-items .circle-btn {
         border-radius: 100%;
         border: 1px solid black;
-
+        margin: .1em;
+        padding: .3em;
       }
+
+nav input {
+  width: 300px;
+  height: 30px;
+  font-size: 1.5em;
+}

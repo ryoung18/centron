@@ -1,9 +1,9 @@
-import React,  { Component } from 'react';
+import React from 'react';
 import "./Header.css";
 
 const Header = () => (
   <header className="logo">
-    Centron  <img src="images/centron-logo.png" /> Life Products
+    Centron  <img src="images/centron-logo.png" alt="Centron Life Products" /> Life Products
   </header>
 )
 

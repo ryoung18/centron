@@ -1,220 +1,125 @@
 import React,  { Component } from 'react';
 import './ProductList.css';
 import ProductListFilter from './ProductListFilter';
+import { setStateOnTimeOut, ajaxRequest, _setState } from './helperFn';
 
-const ProductList = () => (
+class ProductList extends Component {
+  constructor(props) {
+    super(props);
 
-  <div className="outer-container z5 slide-up" >
-      <ProductListFilter />
-      <div className="menu">
-        <a href="https://google.com" className="space text-left">
-          <h2> Filter: Hand Brace > Stiff > Small </h2>
-        </a>
+    this.state = {
+      loaded: false,
+      categories: [],
+      products: [],
+      showFilter: false,
+      filtered: new Set()
+    }
+
+    this.handleClick = this.handleClick.bind(this);
+    this.filterClick = this.filterClick.bind(this);
+  }
+
+  componentDidMount() {
+    let newState = {
+        loaded: true,
+        categories: ['Clavicle', 'Hand Brace', 'Sleeping Hand Brace', 'Lumbar'],
+        products: ajaxRequest
+      }
+    setStateOnTimeOut(this, newState, 500)
+  }
+
+
+  filterClick(status) {
+    let newState = {
+     'filterClose': {showFilter: false}
+    }
+
+    if(status !== 'filterClose') {
+      _setState(this, {filtered: status} )
+    }
+
+    setStateOnTimeOut(this, newState.filterClose, 1000)
+  }
+
+
+  handleClick(event) {
+    let {id} = event.currentTarget
+
+    let newState = {
+     'filterOpen': {showFilter: true}
+    }
+
+    _setState(this, newState[id])
+ }
+
+  render() {
+    if(!this.state.loaded) return <div> loading... </div>
+
+    let {products, filtered} = this.state;
+
+    let filterProducts = filtered.size ? products.filter( product => filtered.has(product.type) ) : products;
+
+    let listProducts = filterProducts.map(product => {
+      let displayPrice = (site) =>  (`$${site[0]} - $${site[1]}`);
+      let displaySvg = (svg) => (`svgs/${svg}`)
+
+      return (
+        <div className="line-container" key={product.id}>
+          <div className="item-image">
+              <img src={product.img} alt='item'/>
+          </div>
+
+          <div className="item-info-container">
+              <div className="item-description">
+                <h4> {product.title} </h4>
+                <p> {product.partNumber}</p>
+                <span className="slide-indicator"></span>
+              </div>
+              <div className="btns-hidden-container">
+                <a href={product.amazonUrl}>
+                  <img src={displaySvg(this.props.amazonSvg)} alt='amazon' />
+                  <p> {displayPrice(product.amazonPrice)} </p>
+                </a>
+                <a href={product.ebayUrl}>
+                  <img src={displaySvg(this.props.ebaySvg)} alt='ebay'/>
+                  <p> {displayPrice(product.ebayPrice)}  </p>
+                </a>
+              </div>
+          </div>
+        </div>
+      )
+    })
+
+
+    return (
+      <div>
+        {this.state.showFilter ?
+          <ProductListFilter
+            filterClick={this.filterClick}
+            filtered={this.state.filtered}
+            categories={this.state.categories}
+          />
+        : ''}
+        <div className="outer-container z5 slide-up" >
+          <div className="menu">
+            <a className="space text-left" onClick={this.handleClick} id='filterOpen'>
+              <h2> Filter: {[...this.state.filtered].join(', ')} </h2>
+            </a>
+          </div>
+
+          <div className="inner-container inner-padding">
+            {listProducts}
+            <div className="bottom-spacing"> </div>
+          </div>
+        </div>
       </div>
-
-      <div className="inner-container inner-padding">
-        <div className="line-container">
-          <div className="item-image">
-              <img src="https://i.ebayimg.com/images/g/hnwAAOSw~oFXI~Yj/s-l1600.jpg" />
-          </div>
-
-          <div className="item-info-container">
-              <div className="item-description">
-                <h4> Clavicle Strap Shoulder Support Brace</h4>
-                <p> part number</p>
-                <span className="slide-indicator"></span>
-              </div>
-              <div className="btns-hidden-container">
-                <a href="http://centronlp.com">
-                  <img src="svgs/amazon-icon.svg" />
-                  <p> $121 </p>
-                </a>
-                <a href="http://amazon.com">
-                  <img src="svgs/amazon-icon.svg" />
-                  <p> $121 </p>
-                </a>
-                <a href="http://ebay.com">
-                  <img src="svgs/ebay-icon.svg" />
-                  <p> $89 </p>
-                </a>
-                <a href="http://centronlp.com">
-                  <img src="svgs/amazon-icon.svg" />
-                  <p> $121 </p>
-                </a>
-                <a href="http://amazon.com">
-                  <img src="svgs/amazon-icon.svg" />
-                  <p> $121 </p>
-                </a>
-                <a href="http://ebay.com">
-                  <img src="svgs/ebay-icon.svg" />
-                  <p> $89 </p>
-                </a>
-              </div>
-          </div>
-        </div>
-
-        <div className="line-container">
-          <div className="item-image">
-              <img src="https://i.ebayimg.com/images/g/hnwAAOSw~oFXI~Yj/s-l1600.jpg" />
-          </div>
-
-          <div className="item-info-container">
-              <div className="item-description">
-                <h4> Clavicle Strap Shoulder Support Brace</h4>
-                <p> part number</p>
-                <span className="slide-indicator"></span>
-              </div>
-              <div className="btns-hidden-container">
-                <a href="http://centronlp.com">
-                  <img src="svgs/amazon-icon.svg" />
-                  <p> $121 </p>
-                </a>
-                <a href="http://amazon.com">
-                  <img src="svgs/amazon-icon.svg" />
-                  <p> $121 </p>
-                </a>
-                <a href="http://ebay.com">
-                  <img src="svgs/ebay-icon.svg" />
-                  <p> $89 </p>
-                </a>
-                <a href="http://centronlp.com">
-                  <img src="svgs/amazon-icon.svg" />
-                  <p> $121 </p>
-                </a>
-                <a href="http://amazon.com">
-                  <img src="svgs/amazon-icon.svg" />
-                  <p> $121 </p>
-                </a>
-                <a href="http://ebay.com">
-                  <img src="svgs/ebay-icon.svg" />
-                  <p> $89 </p>
-                </a>
-              </div>
-          </div>
-        </div>
-
-        <div className="line-container">
-          <div className="item-image">
-              <img src="https://i.ebayimg.com/images/g/hnwAAOSw~oFXI~Yj/s-l1600.jpg" />
-          </div>
-
-          <div className="item-info-container">
-              <div className="item-description">
-                <h4> Clavicle Strap Shoulder Support Brace</h4>
-                <p> part number</p>
-                <span className="slide-indicator"></span>
-              </div>
-              <div className="btns-hidden-container">
-                <a href="http://centronlp.com">
-                  <img src="svgs/amazon-icon.svg" />
-                  <p> $121 </p>
-                </a>
-                <a href="http://amazon.com">
-                  <img src="svgs/amazon-icon.svg" />
-                  <p> $121 </p>
-                </a>
-                <a href="http://ebay.com">
-                  <img src="svgs/ebay-icon.svg" />
-                  <p> $89 </p>
-                </a>
-                <a href="http://centronlp.com">
-                  <img src="svgs/amazon-icon.svg" />
-                  <p> $121 </p>
-                </a>
-                <a href="http://amazon.com">
-                  <img src="svgs/amazon-icon.svg" />
-                  <p> $121 </p>
-                </a>
-                <a href="http://ebay.com">
-                  <img src="svgs/ebay-icon.svg" />
-                  <p> $89 </p>
-                </a>
-              </div>
-          </div>
-        </div>
-
-
-        <div className="line-container">
-          <div className="item-image">
-              <img src="https://i.ebayimg.com/images/g/kWYAAOSwYmZXI9kt/s-l1600.jpg" />
-          </div>
-
-          <div className="item-info-container">
-            <div className="item-description">
-              <h4> Clavicle Strap Shoulder Support Brace </h4>
-              <h4> lasss Clavicle Strap Shoulder Support Brace tttt</h4>
-            </div>
-            <div className="btns-bottom-container">
-              <a href="heheh.com"> <span className="icon icon-amz"></span>  <p> $121 </p> </a>
-              <a href="heheh.com"> <span className="icon icon-ebay"></span> <p> $89 </p> </a>
-              <a href="heheh.com"> <p> Favorites </p></a>
-            </div>
-          </div>
-        </div>
-
-        <div className="line-container">
-          <div className="item-image">
-              <img src="https://i.ebayimg.com/images/g/hnwAAOSw~oFXI~Yj/s-l1600.jpg" />
-          </div>
-
-          <div className="item-info-container">
-              <div className="item-description">
-                <h4> Clavicle Strap Shoulder Support Brace</h4>
-                <h4> Clavicle Strap Shoulder Support Brace </h4>
-
-                <span className="slide-indicator"></span>
-              </div>
-              <div className="btns-hidden-container">
-                <a href="http://centronlp.com">
-                  <img src="svgs/amazon-icon.svg" />
-                  <p> $121 </p>
-                </a>
-                <a href="http://amazon.com">
-                  <img src="svgs/amazon-icon.svg" />
-                  <p> $121 </p>
-                </a>
-                <a href="http://ebay.com">
-                  <img src="svgs/ebay-icon.svg" />
-                  <p> $89 </p>
-                </a>
-                <a href="http://centronlp.com">
-                  <img src="svgs/amazon-icon.svg" />
-                  <p> $121 </p>
-                </a>
-                <a href="http://amazon.com">
-                  <img src="svgs/amazon-icon.svg" />
-                  <p> $121 </p>
-                </a>
-                <a href="http://ebay.com">
-                  <img src="svgs/ebay-icon.svg" />
-                  <p> $89 </p>
-                </a>
-              </div>
-          </div>
-        </div>
-
-
-        <div className="line-container">
-          <div className="item-image">
-              <img src="https://i.ebayimg.com/images/g/hnwAAOSw~oFXI~Yj/s-l1600.jpg" />
-          </div>
-
-          <div className="item-info-container">
-            <div className="item-description btns-visible-padding">
-              <h4> last Clavicle Strap Shoulder Support Brace </h4>
-            </div>
-            <div className="btns-bottom-container">
-              <a href="heheh.com"> <span className="icon icon-amz"></span>  <p> $121 </p> </a>
-              <a href="heheh.com"> <span className="icon icon-ebay"></span> <p> $89 </p> </a>
-              <a href="heheh.com"> <p> Favorites </p> </a>
-            </div>
-          </div>
-        </div>
-
-        <div className="bottom-spacing"> </div>
-      </div>
-    </div>
-
-)
+    )
+  }
+}
 
 export default ProductList;
+
+ProductList.defaultProps = {
+  amazonSvg: 'amazon-icon.svg',
+  ebaySvg: 'ebay-icon.svg'
+}
