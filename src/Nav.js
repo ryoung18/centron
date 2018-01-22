@@ -1,5 +1,6 @@
 import React,  { Component } from 'react';
 import "./Nav.css";
+import { Link } from 'react-router-dom';
 import MenuMain from './MenuMain';
 import { setStateOnTimeOut, _setState } from './helperFn';
 
@@ -20,12 +21,6 @@ class Nav extends Component {
 
   handleChange(event) {
     _setState(this, {searchInput: event.target.value})
-    console.log(this.state.searchInput)
-  }
-
-  focusTextInput() {
-    // Explicitly focus the text input using the raw DOM API
-    this.textInput.focus();
   }
 
 
@@ -66,14 +61,14 @@ class Nav extends Component {
   }
 
   render() {
-    let {display} = this.state;
+    let {display, showMenu} = this.state;
     let navItemDisplay;
 
     if(display === 'default') {
       navItemDisplay = (
         <ul className="navbar-items default">
           <li onClick={this.handleClick} id='menu'   ><img src="svgs/menu-icon.svg" alt='menu'/></li>
-          <li onClick={this.handleClick} id='default'><img src="svgs/home-icon.svg" alt='home'/></li>
+          <li onClick={this.handleClick} id='default'><Link to='/'> <img src="svgs/home-icon.svg" alt='home'/> </Link></li>
           <li onClick={this.handleClick} id='search' ><img src="svgs/search-icon.svg" alt='search'/></li>
           <li onClick={this.handleClick} id='default'>
             <a href={`mailto:info@centronlp.com?subject=Centron%20Life%20Products%20-%20${'hey'}&body=Thanks%20dasds%0A%0ANewParagraph`}>
@@ -99,6 +94,15 @@ class Nav extends Component {
         </ul>
       )
     }
+
+    if(showMenu === 1) {
+      navItemDisplay = (
+        <ul className="navbar-items">
+          <li onClick={this.handleClick} id='menu'   ><img src="svgs/menu-icon.svg" alt='menu'/></li>
+        </ul>
+      )
+    }
+
 
     return (
       <div>

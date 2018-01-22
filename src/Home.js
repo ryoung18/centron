@@ -1,5 +1,6 @@
 import React from 'react';
 import './Home.css';
+import { Link } from  'react-router-dom';
 
 const Home = ({ catagories }) => {
   let content =
@@ -18,6 +19,9 @@ const Home = ({ catagories }) => {
       </div>
 
       <div className="inner-container front-page">
+        <div>
+        <Link to="/product-list">Product List</Link>
+        </div>
         <div className="mosaic">
           <ul>
             { content }

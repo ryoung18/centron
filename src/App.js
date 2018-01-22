@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import { Route } from "react-router-dom";
 import Header from './Header';
 import Nav from './Nav';
 import MenuMain from './MenuMain';
@@ -14,10 +15,9 @@ class App extends Component {
       <div className="App">
         <Header />
         <Nav />
-        <MenuMain />
-        <Home />
-        <ProductList />
-        <Product />
+        <Route exact path="/" component={Home} />
+        <Route path="/product-list" component={ProductList} />
+        <Route path="/product" component={Product} />
       </div>
     );
   }ß

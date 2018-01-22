@@ -8,31 +8,32 @@ nav {
   border-width: 2px 0 0 0;
   width: 100%;
 }
-      .navbar-items {
-        padding: 0 .5em 0 .5em;
-        margin: .2em;
-        display: flex;
-        list-style: none;
-        font-size: 1em;
-        justify-content: space-around;
-      }
 
-     .navbar-items li {
-        align-self: center;
-      }
+.navbar-items {
+  padding: 0 .5em 0 .5em;
+  margin: .2em;
+  display: flex;
+  list-style: none;
+  font-size: 1em;
+  justify-content: space-around;
+}
 
-      .navbar-items > li img {
-        width: 1.9em;
-        height: 1.9em;
-        padding: .2em;
-      }
+.navbar-items li {
+  align-self: center;
+}
 
-      .navbar-items .circle-btn {
-        border-radius: 100%;
-        border: 1px solid black;
-        margin: .1em;
-        padding: .3em;
-      }
+.navbar-items > li img {
+  width: 1.9em;
+  height: 1.9em;
+  padding: .2em;
+}
+
+.navbar-items .circle-btn {
+  border-radius: 100%;
+  border: 1px solid black;
+  margin: .1em;
+  padding: .3em;
+}
 
 nav input {
   width: 100%;

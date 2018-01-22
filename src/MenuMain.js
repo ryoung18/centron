@@ -16,7 +16,7 @@ class MenuMain extends Component {
     this.show = this.show.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     let newState = {
         loaded: true,
         selectedBtn: this.props.menuBtns[0],
@@ -29,7 +29,7 @@ class MenuMain extends Component {
         products: ajaxRequest
       };
 
-    setStateOnTimeOut(this, newState, 500)
+    setStateOnTimeOut(this, newState)
   }
 
   handleClick(event) {
