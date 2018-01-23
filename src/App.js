@@ -13,7 +13,8 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedCats: new Set(['APP SOME', 'ISISISISI', 'KSKSKSKS'])
+      selectedCats: new Set(),
+      introAnimated: false
     }
 
     this.handleClick = this.handleClick.bind(this);
@@ -28,8 +29,10 @@ class App extends Component {
       <div className="App">
         <Header />
         <Nav />
-        <Route exact path="/" render={() => <Home selectCat={this.handleClick} />} />
-        <Route path="/product-list" render={() => <ProductList selectedCats={this.state.selectedCats} />} />
+        <Route exact path="/" render={() =>
+            <Home selectCat={this.handleClick} />} />
+        <Route path="/product-list" render={() =>
+            <ProductList selectedCats={this.state.selectedCats}/>}  />
         <Route path="/product" component={Product} />
       </div>
     );

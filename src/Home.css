@@ -32,16 +32,25 @@
     100% { opacity: 0; }
 }
 
-
 @keyframes fadein {
     0% { opacity: 0; }
     60% { opacity: 1; }
     100% { opacity:.5; }
 }
 
-.mosaic a {
+.mosaic li a {
   color: white;
 }
+
+.above-mosaic {
+  margin-top: -4em;
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 1em;
+  text-align: center;
+}
+
 
 .mosaic li {
   animation: ease normal forwards fadein;

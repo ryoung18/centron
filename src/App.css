@@ -3,7 +3,6 @@
   height: 100%;
 }
 
-
 .outer-container {
   position: fixed;
   top: 0;
@@ -13,7 +12,6 @@
   background: white;
 }
 
-
 .inner-container {
   padding-top: 3em;
   width: 100%;
@@ -21,14 +19,11 @@
   overflow: auto;
   /*height: -webkit-calc(100vh - 9.5em);
   height: calc(100vh - 3.5em);*/
-
 }
 
 .noTopPadding {
   padding-top: 0;
 }
-
-
 
 .front-page {
   display: flex;
@@ -39,8 +34,13 @@
 }
 
 .op0 {
-    opacity: 0;
-    animation: 8s ease normal forwards fadeOut;
+  opacity: 0;
+  animation: 8s ease normal forwards fadeOut;
+}
+
+.loading {
+  opacity: 0;
+  animation: 8s 3s ease normal forwards fadein;
 }
 
 .top-spacing {

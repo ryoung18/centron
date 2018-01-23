@@ -3,16 +3,17 @@ import './Home.css';
 import { Link } from  'react-router-dom';
 
 
-const Home = ({categories, selectedCats}) => {
-
+const Home = ({categories, selectCat}) => {
   let content =
     categories.map(category => {
       return (
-        <li
-          key={category}
-          onClick={ ()=> selectedCats({category}) }
-          >t
+        <li key={category}>
+          <Link
+            to="/product-list"
+            onClick={ ()=> selectCat(new Set([category])) }
+          >
             {category}
+          </Link>
         </li>
       )
     })
@@ -27,11 +28,13 @@ const Home = ({categories, selectedCats}) => {
         </div>
       </div>
 
-      <div className="inner-container front-page">
-        <div>
-        <Link to="/product-list">Product List</Link>
-        </div>
+      <div className="inner-container center front-page">
         <div className="mosaic">
+          <Link to="/product-list" onClick={ ()=> selectCat(new Set()) }>
+            <div className="above-mosaic">
+              Show All Items
+            </div>
+          </Link>
           <ul>
             {content}
           </ul>
@@ -45,14 +48,14 @@ export default Home;
 
 Home.defaultProps = {
   categories : [
-    'Hand brace',
+    'Hand Brace',
     'Finger splint',
-    'Elbow Support',
-    'Clavicle 1',
+    'Sleeping Hand Brace',
+    'Clavicle',
     'Wrist',
     'Lumbar',
-    'Clavicle 2',
-    'Clavicle 3',
+    'Clavicle',
+    'Clavicle',
     'Foot',
     'Sleeping Hand Brace'
   ]

@@ -1,7 +1,7 @@
 import React,  { Component } from 'react';
 import './ProductList.css';
 import ProductListFilter from './ProductListFilter';
-import { setStateOnTimeOut, ajaxRequest, _setState } from './helperFn';
+import { setStateOnTimeOut, ajaxRequest, _setState, loadingScreen } from './helperFn';
 
 class ProductList extends Component {
   constructor(props) {
@@ -23,9 +23,10 @@ class ProductList extends Component {
     let newState = {
         loaded: true,
         categories: ['Clavicle', 'Hand Brace', 'Sleeping Hand Brace', 'Lumbar'],
-        products: ajaxRequest
+        products: ajaxRequest,
+        filtered: this.props.selectedCats
       }
-    setStateOnTimeOut(this, newState, 500)
+    setStateOnTimeOut(this, newState, 1000)
   }
 
 
@@ -53,7 +54,7 @@ class ProductList extends Component {
  }
 
   render() {
-    if(!this.state.loaded) return <div> loading... </div>
+    if(!this.state.loaded) { return loadingScreen() }
 
     let {products, filtered} = this.state;
 
@@ -64,7 +65,7 @@ class ProductList extends Component {
       let displaySvg = (svg) => (`svgs/${svg}`)
 
       return (
-        <div className="line-container" key={product.id}>
+        <div className="line-container" key={product.partNumber}>
           <div className="item-image">
               <img src={product.img} alt='item'/>
           </div>
@@ -103,7 +104,7 @@ class ProductList extends Component {
         <div className="outer-container z5 slide-up" >
           <div className="menu">
             <a className="space text-left" onClick={this.handleClick} id='filterOpen'>
-              <h2> Filter: {[...this.state.filtered].join(', ')} </h2>
+              <h2> Filter: {[...this.state.filtered].join(', ') || 'All'} </h2>
             </a>
           </div>
 
