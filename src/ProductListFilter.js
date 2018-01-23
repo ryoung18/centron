@@ -56,7 +56,7 @@ class ProductListFilter extends Component {
   }
 
   render() {
-    let catagoryList = this.props.categories.map(category => {
+    let categoryList = this.props.categories.map(category => {
       let selected = this.state.filterBy.has(category) ?
         'on-btn' : 'off-btn';
 
@@ -84,7 +84,7 @@ class ProductListFilter extends Component {
 
         <div className="inner-container inner-padding">
           <h2> Type </h2>
-          {catagoryList}
+          {categoryList}
           <div className="bottom-spacing" />
         </div>
       </div>

@@ -2,10 +2,19 @@ import React from 'react';
 import './Home.css';
 import { Link } from  'react-router-dom';
 
-const Home = ({ catagories }) => {
+
+const Home = ({categories, selectedCats}) => {
+
   let content =
-    catagories.map(catagory => {
-      return <li key={catagory}> {catagory} </li>
+    categories.map(category => {
+      return (
+        <li
+          key={category}
+          onClick={ ()=> selectedCats({category}) }
+          >t
+            {category}
+        </li>
+      )
     })
 
   return (
@@ -24,7 +33,7 @@ const Home = ({ catagories }) => {
         </div>
         <div className="mosaic">
           <ul>
-            { content }
+            {content}
           </ul>
         </div>
       </div>
@@ -35,7 +44,7 @@ const Home = ({ catagories }) => {
 export default Home;
 
 Home.defaultProps = {
-  catagories : [
+  categories : [
     'Hand brace',
     'Finger splint',
     'Elbow Support',

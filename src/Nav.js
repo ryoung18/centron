@@ -98,11 +98,10 @@ class Nav extends Component {
     if(showMenu === 1) {
       navItemDisplay = (
         <ul className="navbar-items">
-          <li onClick={this.handleClick} id='menu'   ><img src="svgs/menu-icon.svg" alt='menu'/></li>
+          <li onClick={this.handleClick} id='menu'   > <button> X </button> </li>
         </ul>
       )
     }
-
 
     return (
       <div>
