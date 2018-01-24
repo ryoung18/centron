@@ -15,13 +15,13 @@
 /*https://dev.twitter.com/web/tweet-button*/
 
 /*Questions*/
-/*helperFn.js -> how to bind this*/
+/*utils/helpers.js -> how to bind this*/
 
 :root {
   --color-background: #95BFDA;
   --color-scroll-btn: gray;
 }
-
+z
 html {
   /*height: 100%;*/
   overflow: hidden;

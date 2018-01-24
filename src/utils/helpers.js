@@ -10,25 +10,15 @@ export const _setState = (context, newState)=> {
   context.setState({...context.state, ...newState})
 }
 
-export const loadingScreen = () => {
-  return (
-    <div className="outer-container z5 center">
-      <div className="inner-container front-page op0">
-        <div className="fade-in-logo">
-          Centron
-          <img src="images/centron-logo.png" alt='centron life product logo'/>
-          Life Products
-        </div>
-      </div>
-
-      <div className="inner-container front-page">
-        <div className="loading">
-          Loading ...
-        </div>
+export const loadingScreen = (
+  <div className="outer-container z5 center">
+    <div className="inner-container front-page">
+      <div className="loading">
+        <img src="images/centron-logo.png" alt='centron life product logo'/> <p> Loading ... </p>
       </div>
     </div>
-  )
-}
+  </div>
+)
 
 //will remove after implementing redux
 export const ajaxRequest  = [

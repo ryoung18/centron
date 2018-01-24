@@ -39,8 +39,15 @@
 }
 
 .loading {
-  opacity: 0;
-  animation: 8s 3s ease normal forwards fadein;
+   opacity: 0;
+   text-align: center;
+   animation: 3s ease normal infinite pulse;
+}
+
+@keyframes pulse {
+    0% { opacity: .1; }
+   50% { opacity: .7; }
+  100% { opacity: .1; }
 }
 
 .top-spacing {

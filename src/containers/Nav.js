@@ -1,8 +1,8 @@
 import React,  { Component } from 'react';
-import "./Nav.css";
+import "../css/Nav.css";
 import { Link } from 'react-router-dom';
 import MenuMain from './MenuMain';
-import { setStateOnTimeOut, _setState } from './helperFn';
+import { setStateOnTimeOut, _setState } from '../utils/helpers';
 
 class Nav extends Component {
   constructor(props) {
@@ -20,28 +20,27 @@ class Nav extends Component {
   }
 
   handleChange(event) {
-    _setState(this, {searchInput: event.target.value})
+    _setState(this, { searchInput: event.target.value })
   }
 
 
   handleClick(event) {
-    let {id} = event.currentTarget;
+    const { id } = event.currentTarget;
 
-    if(id === 'menu') {
-      _setState(this, {showMenu: this.state.showMenu+1});
+    if (id === 'menu') {
+      _setState(this, { showMenu: this.state.showMenu+1 });
       if(this.state.showMenu === 1) {
-        setStateOnTimeOut(this, {showMenu: 0})
+        setStateOnTimeOut(this, { showMenu: 0 })
       };
       return;
     }
 
-    if(id === 'search') {
-      _setState(this, {display: id});
+    if (id === 'search') {
+      _setState(this, { display: id });
       return;
     };
 
-    _setState(this, {display: 'default', searchInput: ''} )
-
+    _setState(this, { display: 'default', searchInput: '' } )
   }
 
   generateHref(type) {
@@ -61,10 +60,10 @@ class Nav extends Component {
   }
 
   render() {
-    let {display, showMenu} = this.state;
+    const {display, showMenu} = this.state;
     let navItemDisplay;
 
-    if(display === 'default') {
+    if (display === 'default') {
       navItemDisplay = (
         <ul className="navbar-items default">
           <li onClick={this.handleClick} id='menu'   ><img src="svgs/menu-icon.svg" alt='menu'/></li>
@@ -76,7 +75,8 @@ class Nav extends Component {
             </a>
           </li>
           <li onClick={this.handleClick} id='default'>
-            <a href={`https://twitter.com/intent/tweet?text=Centron%20Life%20Products%20-%20Clavicle%20Supprt%20On%20Sale&url=https%3A%2F%2Fwww.centronlp.com%2Fclavicle%2Fhand&tsrc=twtr`}>
+            <a
+              href={`https://twitter.com/intent/tweet?text=Centron%20Life%20Products%20-%20Clavicle%20Supprt%20On%20Sale&url=https%3A%2F%2Fwww.centronlp.com%2Fclavicle%2Fhand&tsrc=twtr`}>
               <img className="circle-btn" src="svgs/twitter-icon.svg" alt='twitter'/>
             </a>
           </li>
@@ -84,28 +84,34 @@ class Nav extends Component {
       )
     }
 
-    if(display === 'search') {
+    if (display === 'search') {
       navItemDisplay = (
         <ul className="navbar-items search">
           <li id='menu'><img src="svgs/search-icon.svg" alt='search'/></li>
-          <li><input value={this.state.searchInput} onChange={this.handleChange} ref={(input) => { this.textInput = input; }} /></li>
+          <li>
+            <input
+              value={this.state.searchInput}
+              onChange={this.handleChange}
+              ref={(input) => {this.textInput = input;}}
+            />
+          </li>
           <li onClick={this.handleClick} id='find'><button> Find </button></li>
           <li onClick={this.handleClick} id='default'><button> X </button></li>
         </ul>
       )
     }
 
-    if(showMenu === 1) {
+    if (showMenu === 1) {
       navItemDisplay = (
         <ul className="navbar-items">
-          <li onClick={this.handleClick} id='menu'   > <button> X </button> </li>
+          <li onClick={this.handleClick} id='menu'><button> X </button></li>
         </ul>
       )
     }
 
     return (
       <div>
-        { this.state.showMenu ? <MenuMain show={this.state.showMenu}/> : '' }
+        {this.state.showMenu ? <MenuMain show={this.state.showMenu}/> : ''}
         <nav>
           {navItemDisplay}
         </nav>

@@ -1,5 +1,5 @@
 import React from 'react';
-import './Product.css';
+import '../css/Product.css';
 
 const Product = () => (
   <div className="outer-container z10 slide-up hide">

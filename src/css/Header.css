@@ -14,18 +14,18 @@
   display: flex;
 }
 
-        .logo img{
-          margin-left: 5px;
-          margin-right: 5px;
-          width: 3em;
-        }
+.logo img{
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 3em;
+}
 
-        .slide-down {
-          top: -5em;
-          animation: 2s 8s ease normal forwards slide-down;
-        }
+.slide-down {
+  top: -5em;
+  animation: 2s 8s ease normal forwards slide-down;
+}
 
-        @keyframes slide-down {
-            0% { top: -5em; }
-            100% { top: 1em; }
-        }
+@keyframes slide-down {
+    0% { top: -5em; }
+    100% { top: 1em; }
+}

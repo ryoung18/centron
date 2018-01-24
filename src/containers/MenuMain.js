@@ -1,6 +1,6 @@
 import React,  { Component } from 'react';
-import "./MenuMain.css";
-import { setStateOnTimeOut, ajaxRequest } from './helperFn';
+import "../css/MenuMain.css";
+import { setStateOnTimeOut, ajaxRequest, loadingScreen } from '../utils/helpers';
 
 class MenuMain extends Component {
   constructor(props) {
@@ -17,10 +17,10 @@ class MenuMain extends Component {
   }
 
   componentWillMount() {
-    let newState = {
+    const newState = {
         loaded: true,
         selectedBtn: this.props.menuBtns[0],
-        user : {
+        user: {
           name: 'Joe',
           type: 'Business Account',
           img: 'http://piratevinyldecals.com/wps/wp-content/uploads/2014/01/Hello-Kitty-Winking-pv183.png'
@@ -39,14 +39,15 @@ class MenuMain extends Component {
   }
 
   show(){
-         if(this.props.show === 1) return 'slide-right';
-         if(this.props.show === 2) return 'slide-left';
-         return 'hide';
-       }
+    if (this.props.show === 1) return 'slide-right';
+    if (this.props.show === 2) return 'slide-left';
+    return 'hide';
+  }
 
   render() {
+    const { loaded }  = this.state;
 
-    if(!this.state.loaded) return <div> loading... </div>
+    if (!loaded) { return loadingScreen }
 
     let listProducts =
         this.state.products.map(product => {
@@ -95,7 +96,7 @@ class MenuMain extends Component {
         })
 
     return (
-      <div className={ `outer-container z110 ${this.show()}` }>
+      <div className={`outer-container z110 ${this.show()}` }>
         <div className="user-container">
           <div className="user-image">
             <img  className="round" src={this.state.user.img} alt='user' />

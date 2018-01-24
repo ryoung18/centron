@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './ProductListFilter.css';
-import { _setState } from './helperFn';
+import '../css/ProductListFilter.css';
+import { _setState } from '../utils/helpers';
 
 class ProductListFilter extends Component {
   constructor(props) {
@@ -15,49 +15,53 @@ class ProductListFilter extends Component {
   }
 
   isUpdated() {
-    let filterByState = this.state.filterBy;
-    let filteredProps = this.props.filtered;
+    const { filterBy } = this.state;
+    const { filtered } = this.props;
 
-    if( filterByState.size !== filteredProps.size) {
+    if( filterBy.size !== filtered.size) {
       return true;
     }
 
-    for(let k of [...filterByState] ) {
-      if(!filteredProps.has(k)) {
+    for(let k of [...filterBy] ) {
+      if(!filtered.has(k)) {
         return true;
       }
     }
+
     return false
   }
 
   handleClick(event) {
-    if(event === 'close') {
+    const { filterClick } = this.props;
+    const { filterBy } = this.state;
+
+    if (event === 'close') {
       _setState(this, { animation: 'slide-out'} )
 
       if(this.isUpdated()) {
-        this.props.filterClick(this.state.filterBy)
+        filterClick(filterBy)
       } else {
-        this.props.filterClick('filterClose')
+        filterClick('filterClose')
       }
     }
 
-    if(event.currentTarget) {
+    if (event.currentTarget) {
       let { id } = event.currentTarget;
-      let selected = new Set([...this.state.filterBy]);
+      let selected = new Set([...filterBy]);
 
-      if( selected.has(id) ) {
+      if (selected.has(id) ) {
         selected.delete(id)
       } else {
         selected.add(id);
       }
 
-      _setState(this, {filterBy: selected})
+      _setState(this, { filterBy: selected })
     }
   }
 
   render() {
     let categoryList = this.props.categories.map(category => {
-      let selected = this.state.filterBy.has(category) ?
+    let selected = this.state.filterBy.has(category) ?
         'on-btn' : 'off-btn';
 
       return (
@@ -75,7 +79,7 @@ class ProductListFilter extends Component {
     })
 
     return (
-      <div className={`outer-container z10  ${this.state.animation}`}>
+      <div className={`outer-container z10 ${this.state.animation}`}>
         <div className="menu">
           <a className="space" id="close" onClick={event => this.handleClick(event.currentTarget.id)}>
             <h2> Close </h2>

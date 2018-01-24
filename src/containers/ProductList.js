@@ -1,7 +1,7 @@
 import React,  { Component } from 'react';
-import './ProductList.css';
+import '../css/ProductList.css';
 import ProductListFilter from './ProductListFilter';
-import { setStateOnTimeOut, ajaxRequest, _setState, loadingScreen } from './helperFn';
+import { setStateOnTimeOut, ajaxRequest, _setState, loadingScreen } from '../utils/helpers';
 
 class ProductList extends Component {
   constructor(props) {
@@ -26,20 +26,21 @@ class ProductList extends Component {
         products: ajaxRequest,
         filtered: this.props.selectedCats
       }
-    setStateOnTimeOut(this, newState, 1000)
+
+    setStateOnTimeOut(this, newState)
   }
 
 
   filterClick(status) {
     let newState = {
-     'filterClose': {showFilter: false}
+     'filterClose': { showFilter: false }
     }
 
     if(status !== 'filterClose') {
-      _setState(this, {filtered: status} )
+      _setState(this, { filtered: status })
     }
 
-    setStateOnTimeOut(this, newState.filterClose, 1000)
+    setStateOnTimeOut(this, newState.filterClose)
   }
 
 
@@ -47,16 +48,16 @@ class ProductList extends Component {
     let {id} = event.currentTarget
 
     let newState = {
-     'filterOpen': {showFilter: true}
+     'filterOpen': { showFilter: true }
     }
 
     _setState(this, newState[id])
- }
+  }
 
   render() {
-    if(!this.state.loaded) { return loadingScreen() }
+    const { products, filtered, loaded } = this.state;
 
-    let {products, filtered} = this.state;
+    if(!loaded) { return loadingScreen }
 
     let filterProducts = filtered.size ? products.filter( product => filtered.has(product.type) ) : products;
 
@@ -91,9 +92,9 @@ class ProductList extends Component {
       )
     })
 
-
     return (
-      <div>
+      <div className="product-list">
+
         {this.state.showFilter ?
           <ProductListFilter
             filterClick={this.filterClick}
@@ -101,6 +102,7 @@ class ProductList extends Component {
             categories={this.state.categories}
           />
         : ''}
+
         <div className="outer-container z5 slide-up" >
           <div className="menu">
             <a className="space text-left" onClick={this.handleClick} id='filterOpen'>
@@ -112,6 +114,7 @@ class ProductList extends Component {
             {listProducts}
             <div className="bottom-spacing"> </div>
           </div>
+
         </div>
       </div>
     )

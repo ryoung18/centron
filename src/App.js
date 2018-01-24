@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import './App.css';
+import './css/App.css';
 import { Route } from "react-router-dom";
-import Header from './Header';
-import Nav from './Nav';
-import MenuMain from './MenuMain';
-import Home from './Home';
-import ProductList from './ProductList';
-import Product from './Product';
-import { _setState } from './helperFn';
+import Header from './components/Header';
+import Home from './components/Home';
+import Product from './components/Product';
+import Nav from './containers/Nav';
+import ProductList from './containers/ProductList';
+import { _setState } from './utils/helpers';
 
 class App extends Component {
   constructor(props) {
@@ -21,7 +20,7 @@ class App extends Component {
   }
 
   handleClick(event) {
-    _setState(this, {selectedCats: event})
+    _setState(this, { selectedCats: event })
   }
 
   render() {
@@ -29,10 +28,16 @@ class App extends Component {
       <div className="App">
         <Header />
         <Nav />
-        <Route exact path="/" render={() =>
-            <Home selectCat={this.handleClick} />} />
-        <Route path="/product-list" render={() =>
-            <ProductList selectedCats={this.state.selectedCats}/>}  />
+        <Route
+          exact path="/"
+          render={() =>
+            <Home selectCat={this.handleClick} />}
+          />
+        <Route
+          path="/product-list"
+          render={() =>
+            <ProductList selectedCats={this.state.selectedCats}/>}
+           />
         <Route path="/product" component={Product} />
       </div>
     );
