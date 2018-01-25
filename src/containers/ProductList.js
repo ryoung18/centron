@@ -36,7 +36,7 @@ class ProductList extends Component {
      'filterClose': { showFilter: false }
     }
 
-    if(status !== 'filterClose') {
+    if (status !== 'filterClose') {
       _setState(this, { filtered: status })
     }
 
@@ -57,13 +57,12 @@ class ProductList extends Component {
   render() {
     const { products, filtered, loaded } = this.state;
 
-    if(!loaded) { return loadingScreen }
+    if (!loaded) { return loadingScreen }
 
-    let filterProducts = filtered.size ? products.filter( product => filtered.has(product.type) ) : products;
+    let filteredProducts = filtered.size ? products.filter( product => filtered.has(product.type) ) : products;
 
-    let listProducts = filterProducts.map(product => {
+    let listProducts = filteredProducts.map(product => {
       let displayPrice = (site) =>  (`$${site[0]} - $${site[1]}`);
-      let displaySvg = (svg) => (`svgs/${svg}`)
 
       return (
         <div className="line-container" key={product.partNumber}>
@@ -79,12 +78,14 @@ class ProductList extends Component {
               </div>
               <div className="btns-hidden-container">
                 <a href={product.amazonUrl}>
-                  <img src={displaySvg(this.props.amazonSvg)} alt='amazon' />
-                  <p> {displayPrice(product.amazonPrice)} </p>
+                  <span className="circleBtn">
+                    <img src={`svgs/${this.props.heartSvg}`} alt='favorite' />
+                  </span>
                 </a>
                 <a href={product.ebayUrl}>
-                  <img src={displaySvg(this.props.ebaySvg)} alt='ebay'/>
-                  <p> {displayPrice(product.ebayPrice)}  </p>
+                  <span className="circleBtn">
+                    <img src={`svgs/${this.props.ebaySvg}`} alt='ebay'/>
+                  </span>
                 </a>
               </div>
           </div>
@@ -124,6 +125,6 @@ class ProductList extends Component {
 export default ProductList;
 
 ProductList.defaultProps = {
-  amazonSvg: 'amazon-icon.svg',
+  heartSvg: 'heart-icon.svg',
   ebaySvg: 'ebay-icon.svg'
 }

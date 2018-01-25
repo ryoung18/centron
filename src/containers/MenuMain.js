@@ -16,7 +16,7 @@ class MenuMain extends Component {
     this.show = this.show.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const newState = {
         loaded: true,
         selectedBtn: this.props.menuBtns[0],

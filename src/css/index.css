@@ -1,22 +1,3 @@
-/*http://paletton.com/#uid=13v0u0kaOO91S+h6eVJfgDQjtux*/
-/*https://benfrain.com/the-ios-safari-menu-bar-is-hostile-to-web-apps-discuss/*/
-/*https://stackoverflow.com/questions/29894997/prevent-ios-bounce-without-disabling-scroll-ability*/
-/*https://css-tricks.com/svg-use-with-external-reference-take-2/*/
-/*http://www.heropatterns.com/*/
-/*https://icomoon.io/app/#/select*/
-/*https://www.w3schools.com/html/html5_semantic_elements.asp*/
-/*https://github.com/airbnb/javascript/tree/master/react*/
-/*https://davidwalsh.name/function-debounce*/
-/*https://medium.com/react-ecosystem/how-to-handle-state-in-react-6f2d3cd73a0c*/
-/*https://webdesign.tutsplus.com/articles/quick-tip-using-web-inspector-to-debug-mobile-safari--webdesign-8787*/
-/*https://github.com/reactjs/redux/issues/1709*/
-/*https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow*/
-/*https://developers.facebook.com/docs/sharing/web*/
-/*https://dev.twitter.com/web/tweet-button*/
-
-/*Questions*/
-/*utils/helpers.js -> how to bind this*/
-
 :root {
   --color-background: #95BFDA;
   --color-scroll-btn: gray;
@@ -52,4 +33,8 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+}
+
+input {
+  padding-left: .5em;
 }

@@ -63,10 +63,17 @@
   }
 
   .btns-hidden-container img {
-    border: 1px solid black;
-    border-radius: 100%;
-    padding: .3em;
     width: 2em;
+  }
+
+  .circleBtn {
+    --btn-size: 3em;
+    border: 1px solid red;
+    border-radius: 100%;
+    width: var(--btn-size);;
+    height: var(--btn-size);
+    display: flex;
+    justify-content: center;
   }
 
   .btns-hidden-container p {
@@ -212,6 +219,7 @@ animation:
 
 .scroll {
   overflow: scroll;
+  -webkit-overflow-scrolling: touch;
   height: 100%;
 }
 

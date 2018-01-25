@@ -7,29 +7,35 @@ import { setStateOnTimeOut, _setState } from '../utils/helpers';
 class Nav extends Component {
   constructor(props) {
     super(props)
+
     this.state = {
       showMenu: 0,
       searchInput: '',
-      display: 'default',
-      hrefInfo: 'hello'
+      display: 'default'
     }
 
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.generateHref = this.generateHref.bind(this);
+    this.focusTextInput = this.focusTextInput.bind(this);
+  }
+
+  focusTextInput() {
+    // Explicitly focus the text input using the raw DOM API
+    this.textInput.focus();
   }
 
   handleChange(event) {
     _setState(this, { searchInput: event.target.value })
   }
 
-
   handleClick(event) {
     const { id } = event.currentTarget;
 
     if (id === 'menu') {
-      _setState(this, { showMenu: this.state.showMenu+1 });
-      if(this.state.showMenu === 1) {
+      _setState(this, { showMenu: this.state.showMenu+1 })
+
+      if (this.state.showMenu === 1) {
         setStateOnTimeOut(this, { showMenu: 0 })
       };
       return;
@@ -57,6 +63,12 @@ class Nav extends Component {
     }
 
     return result;
+  }
+
+  componentDidUpdate() {
+    if (this.state.display === 'search') {
+      this.focusTextInput()
+    }
   }
 
   render() {
@@ -91,6 +103,7 @@ class Nav extends Component {
           <li>
             <input
               value={this.state.searchInput}
+              type="text"
               onChange={this.handleChange}
               ref={(input) => {this.textInput = input;}}
             />

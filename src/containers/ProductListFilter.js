@@ -18,17 +18,17 @@ class ProductListFilter extends Component {
     const { filterBy } = this.state;
     const { filtered } = this.props;
 
-    if( filterBy.size !== filtered.size) {
+    if ( filterBy.size !== filtered.size) {
       return true;
     }
 
     for(let k of [...filterBy] ) {
-      if(!filtered.has(k)) {
+      if (!filtered.has(k)) {
         return true;
       }
     }
 
-    return false
+    return false;
   }
 
   handleClick(event) {
@@ -38,7 +38,7 @@ class ProductListFilter extends Component {
     if (event === 'close') {
       _setState(this, { animation: 'slide-out'} )
 
-      if(this.isUpdated()) {
+      if (this.isUpdated()) {
         filterClick(filterBy)
       } else {
         filterClick('filterClose')
@@ -61,7 +61,7 @@ class ProductListFilter extends Component {
 
   render() {
     let categoryList = this.props.categories.map(category => {
-    let selected = this.state.filterBy.has(category) ?
+    let selectedBtn = this.state.filterBy.has(category) ?
         'on-btn' : 'off-btn';
 
       return (
@@ -70,7 +70,7 @@ class ProductListFilter extends Component {
             {category}
           </h2>
           <div
-            className={`on-off-btn ${selected}`}
+            className={`on-off-btn ${selectedBtn}`}
             onClick={this.handleClick}
             id={category} >
           </div>
