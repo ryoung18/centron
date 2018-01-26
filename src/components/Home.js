@@ -10,7 +10,8 @@ const Home = ({categories, selectCat}) => {
         <li key={category}>
           <Link
             to="/product-list"
-            onClick={ ()=> selectCat(new Set([category])) }
+            onClick={selectCat}
+            id={category}
           >
             {category}
           </Link>

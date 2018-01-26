@@ -1,4 +1,3 @@
-import React from 'react';
 
 export const setStateOnTimeOut = (context, newState, time=1000)=> {
   setTimeout(() => {
@@ -7,18 +6,8 @@ export const setStateOnTimeOut = (context, newState, time=1000)=> {
 }
 
 export const _setState = (context, newState)=> {
-  context.setState({...context.state, ...newState})
+  context.setState((prevState) => ({...prevState, ...newState}) )
 }
-
-export const loadingScreen = (
-  <div className="outer-container z5 center">
-    <div className="inner-container front-page">
-      <div className="loading">
-        <img src="images/centron-logo.png" alt='centron life product logo'/> <p> Loading ... </p>
-      </div>
-    </div>
-  </div>
-)
 
 //will remove after implementing redux
 export const ajaxRequest  = [

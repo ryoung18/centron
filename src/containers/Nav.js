@@ -17,23 +17,17 @@ class Nav extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.generateHref = this.generateHref.bind(this);
-    this.focusTextInput = this.focusTextInput.bind(this);
-  }
-
-  focusTextInput() {
-    // Explicitly focus the text input using the raw DOM API
-    this.textInput.focus();
   }
 
   handleChange(event) {
-    _setState(this, { searchInput: event.target.value })
+    this.setState( { searchInput: event.target.value })
   }
 
   handleClick(event) {
     const { id } = event.currentTarget;
 
     if (id === 'menu') {
-      _setState(this, { showMenu: this.state.showMenu+1 })
+      this.setState( { showMenu: this.state.showMenu+1 })
 
       if (this.state.showMenu === 1) {
         setStateOnTimeOut(this, { showMenu: 0 })
@@ -42,16 +36,16 @@ class Nav extends Component {
     }
 
     if (id === 'search') {
-      _setState(this, { display: id });
+      this.setState( { display: id });
       return;
     };
 
-    _setState(this, { display: 'default', searchInput: '' } )
+    this.setState( { display: 'default', searchInput: '' } )
   }
 
   generateHref(type) {
     let result;
-    // <a href={`https://twitter.com/intent/tweet?text=Centron%20Life%20Products%20-%20Clavicle%20Supprt%20On%20Sale&url=https%3A%2F%2Fwww.centronlp.com%2Fclavicle%2Fhand&tsrc=twtr`}>
+
     switch (type) {
       case 'email':
         result=`mailto:info@centronlp.com?subject=Centron%20Life%20Products%20-%20&body=Thanks%20dasds%0A%0ANewParagraph`;
@@ -67,7 +61,7 @@ class Nav extends Component {
 
   componentDidUpdate() {
     if (this.state.display === 'search') {
-      this.focusTextInput()
+      this.textInput.focus();
     }
   }
 
@@ -78,9 +72,17 @@ class Nav extends Component {
     if (display === 'default') {
       navItemDisplay = (
         <ul className="navbar-items default">
-          <li onClick={this.handleClick} id='menu'   ><img src="svgs/menu-icon.svg" alt='menu'/></li>
-          <li onClick={this.handleClick} id='default'><Link to='/'> <img src="svgs/home-icon.svg" alt='home'/> </Link></li>
-          <li onClick={this.handleClick} id='search' ><img src="svgs/search-icon.svg" alt='search'/></li>
+          <li onClick={this.handleClick} id='menu'   >
+            <img src="svgs/menu-icon.svg" alt='menu'/>
+          </li>
+          <li onClick={this.handleClick} id='default'>
+            <Link to='/'>
+              <img src="svgs/home-icon.svg" alt='home'/>
+            </Link>
+          </li>
+          <li onClick={this.handleClick} id='search' >
+            <img src="svgs/search-icon.svg" alt='search'/>
+          </li>
           <li onClick={this.handleClick} id='default'>
             <a href={`mailto:info@centronlp.com?subject=Centron%20Life%20Products%20-%20${'hey'}&body=Thanks%20dasds%0A%0ANewParagraph`}>
               <img className="circle-btn" src="svgs/email-icon.svg" alt='mail' />
@@ -122,9 +124,18 @@ class Nav extends Component {
       )
     }
 
+    let styles = {
+      position: 'absolute',
+      color: 'black',
+      'z-index': '1'
+    }
+
     return (
       <div>
-        {this.state.showMenu ? <MenuMain show={this.state.showMenu}/> : ''}
+        {this.state.showMenu ? (
+          <div style={styles}>
+              HELL<br />LLOOO <br /> OEOEOEOEOE
+          </div> ): ''}
         <nav>
           {navItemDisplay}
         </nav>

@@ -1,6 +1,7 @@
 import React,  { Component } from 'react';
 import "../css/MenuMain.css";
-import { setStateOnTimeOut, ajaxRequest, loadingScreen } from '../utils/helpers';
+import LoadingScreen from "../components/LoadingScreen";
+import { setStateOnTimeOut, ajaxRequest } from "../utils/helpers";
 
 class MenuMain extends Component {
   constructor(props) {
@@ -9,16 +10,17 @@ class MenuMain extends Component {
     this.state = {
       selectedBtn: this.props.menuBtns[0],
       loaded: false,
-      user : {}
+      user : {},
+      products: [],
+      categories: [],
+      img: ''
     }
 
     this.handleClick = this.handleClick.bind(this);
-    this.show = this.show.bind(this);
   }
 
   componentDidMount() {
     const newState = {
-        loaded: true,
         selectedBtn: this.props.menuBtns[0],
         user: {
           name: 'Joe',
@@ -38,65 +40,53 @@ class MenuMain extends Component {
     })
   }
 
-  show(){
-    if (this.props.show === 1) return 'slide-right';
-    if (this.props.show === 2) return 'slide-left';
-    return 'hide';
-  }
-
   render() {
-    const { loaded }  = this.state;
+    let listProducts = this.state.products.map(product => {
+      let displayPrice = (site) =>  (`$${site[0]} - $${site[1]}`);
+      let displaySvg = (svg) => (`svgs/${svg}`);
 
-    if (!loaded) { return loadingScreen }
+      return (
+        <div className="line-container" key={product.id}>
+          <div className="item-image">
+              <img src={product.img} alt={product.title}/>
+          </div>
 
-    let listProducts =
-        this.state.products.map(product => {
-        let displayPrice = (site) =>  (`$${site[0]} - $${site[1]}`);
-        let displaySvg = (svg) => (`svgs/${svg}`);
-
-        return (
-              <div className="line-container" key={product.id}>
-                <div className="item-image">
-                    <img src={product.img} alt={product.title}/>
-                </div>
-
-                <div className="item-info-container">
-                    <div className="item-description">
-                      <h4> aa {product.title} </h4>
-                      <p> {product.partNumber}</p>
-                      <span className="slide-indicator"></span>
-                    </div>
-                    <div className="btns-hidden-container">
-                      <a href={product.amazonUrl}>
-                        <img src={displaySvg(this.props.amazonSvg)} alt='link to amazon'/>
-                        <p> {displayPrice(product.amazonPrice)} </p>
-                      </a>
-                      <a href={product.ebayUrl}>
-                        <img src={displaySvg(this.props.ebaySvg)}  alt='link to ebay'/>
-                        <p> {displayPrice(product.ebayPrice)}  </p>
-                      </a>
-                    </div>
-                </div>
+          <div className="item-info-container">
+              <div className="item-description">
+                <h4> aa {product.title} </h4>
+                <p> {product.partNumber}</p>
+                <span className="slide-indicator"></span>
               </div>
-            )
-          })
+              <div className="btns-hidden-container">
+                <a href={product.amazonUrl}>
+                  <img src={displaySvg(this.props.amazonSvg)} alt='link to amazon'/>
+                  <p> {displayPrice(product.amazonPrice)} </p>
+                </a>
+                <a href={product.ebayUrl}>
+                  <img src={displaySvg(this.props.ebaySvg)}  alt='link to ebay'/>
+                  <p> {displayPrice(product.ebayPrice)}  </p>
+                </a>
+              </div>
+          </div>
+        </div>
+      )
+    })
 
 
-    let menuBar =
-        this.props.menuBtns.map(button =>{
-        return (
-            <li
-              className={this.state.selectedBtn === button ? 'selected': ''}
-              onClick={this.handleClick}
-              id={button}
-              key={button} >
-              {button}
-            </li>
-          )
-        })
+    let menuBar = this.props.menuBtns.map(button =>{
+      return (
+          <li
+            className={this.state.selectedBtn === button ? 'selected': ''}
+            onClick={this.handleClick}
+            id={button}
+            key={button} >
+            {button}
+          </li>
+        )
+      })
 
-    return (
-      <div className={`outer-container z110 ${this.show()}` }>
+    return listProducts.length ? (
+      <div className={`outer-container z110 ${this.props.show === 1 ? 'slide-right': 'slide-left'}` }>
         <div className="user-container">
           <div className="user-image">
             <img  className="round" src={this.state.user.img} alt='user' />
@@ -117,7 +107,7 @@ class MenuMain extends Component {
           <div className="bottom-spacing" />
         </div>
       </div>
-    )
+    ) : (<LoadingScreen />)
   }
 }
 
