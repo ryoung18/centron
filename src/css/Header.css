@@ -1,11 +1,9 @@
 .logo {
   position: fixed;
-  background: rgba(255,255,255, 0.5);
-  background: rgba(255,255,255,.7);
-  /*background: -moz-linear-gradient(top, rgba(255,255,255,1) 11%, rgba(255,255,255,0) 100%); /* FF3.6-15 */*/
-  /*background: -webkit-linear-gradient(top, rgba(255,255,255,1) 11%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */*/
-  /*background: linear-gradient(to bottom, rgba(255,255,255,1) 11%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */*/
-  top: 0;
+  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.7);
+  /*background: -moz-linear-gradient(top, rgba(255,255,255,1) 11%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
+  */: 0;
   padding-top: 1em;
   z-index: 100;
   width: 100%;
@@ -14,7 +12,7 @@
   display: flex;
 }
 
-.logo img{
+.logo img {
   margin-left: 5px;
   margin-right: 5px;
   width: 3em;
@@ -26,6 +24,10 @@
 }
 
 @keyframes slide-down {
-    0% { top: -5em; }
-    100% { top: 1em; }
+  0% {
+    top: -5em;
+  }
+  100% {
+    top: 1em;
+  }
 }

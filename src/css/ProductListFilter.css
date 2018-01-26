@@ -11,16 +11,15 @@
   margin: 0;
 }
 
-
 .on-off-btn {
   /*border: black;*/
   border-style: outset;
   border-radius: 30px;
-  padding: .1em .5em .1em .5em;
+  padding: 0.1em 0.5em 0.1em 0.5em;
   background: lightgray;
   color: gray;
   font-weight: bold;
-  margin: .2em 0 .2em 0;
+  margin: 0.2em 0 0.2em 0;
 }
 
 .on-off-btn:active {
@@ -29,7 +28,7 @@
 
 .on-btn {
   border-style: inset;
-  padding: .1em .8em .1em .8em;
+  padding: 0.1em 0.8em 0.1em 0.8em;
   background: lightgreen;
   color: white;
 }
@@ -39,9 +38,9 @@
 }
 
 .on-btn:before {
-  content: "ON"
+  content: "ON";
 }
 
 .off-btn:before {
-  content: "OFF"
+  content: "OFF";
 }

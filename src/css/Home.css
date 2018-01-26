@@ -27,15 +27,27 @@
 }
 
 @keyframes fadeOut {
-    0% { opacity: 0; }
-    50% { opacity: 1; }
-    100% { opacity: 0; }
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 @keyframes fadein {
-    0% { opacity: 0; }
-    60% { opacity: 1; }
-    100% { opacity:.5; }
+  0% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
 }
 
 .mosaic li a {
@@ -50,7 +62,6 @@
   padding: 1em;
   text-align: center;
 }
-
 
 .mosaic li {
   animation: ease normal forwards fadein;
@@ -67,7 +78,7 @@
   justify-content: center;
   align-items: center;
   background-repeat: no-repeat;
-  background-size:cover;
+  background-size: cover;
   opacity: 0;
   color: white;
   /*text-shadow:
@@ -76,7 +87,7 @@
    1px -1px 0 #000,
    -1px 1px 0 #000,
     1px 1px 0 #000;*/
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   /*transition: opacity .5 1s;*/
 }
 
@@ -85,7 +96,7 @@
 .mosaic li:focus {
   opacity: 1;
   -webkit-animation: none;
-    animation: none;
+  animation: none;
 }
 
 .mosaic li:nth-child(odd) {
@@ -103,7 +114,7 @@
 .mosaic li:nth-child(2) {
   opacity: 0;
   left: 30%;
-  width:  20%;
+  width: 20%;
   height: 30%;
   background-image: url(" https://i.ebayimg.com/images/g/CCQAAOSwpP9Y78r8/s-l1600.jpg");
 }
@@ -117,7 +128,7 @@
 }
 
 .mosaic li:nth-child(4) {
-  left:  80%;
+  left: 80%;
   width: 20%;
   height: 60%;
   background-size: cover;
@@ -151,7 +162,7 @@
   width: 30%;
   height: 50%;
   background-size: cover;
-  background-image:url("https://i.ebayimg.com/images/g/tewAAOSwv9FXg-y2/s-l1600.jpg");
+  background-image: url("https://i.ebayimg.com/images/g/tewAAOSwv9FXg-y2/s-l1600.jpg");
 }
 
 .mosaic li:nth-child(8) {
