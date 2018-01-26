@@ -10,8 +10,8 @@ nav {
 }
 
 .navbar-items {
-  padding: 0 .5em 0 .5em;
-  margin: .2em;
+  padding: 0 0.5em 0 0.5em;
+  margin: 0.2em;
   display: flex;
   list-style: none;
   font-size: 1em;
@@ -25,14 +25,14 @@ nav {
 .navbar-items > li img {
   width: 1.9em;
   height: 1.9em;
-  padding: .2em;
+  padding: 0.2em;
 }
 
 .navbar-items .circle-btn {
   border-radius: 100%;
   border: 1px solid black;
-  margin: .1em;
-  padding: .3em;
+  margin: 0.1em;
+  padding: 0.3em;
 }
 
 nav input {
@@ -40,17 +40,17 @@ nav input {
   height: 30px;
   font-size: 1em;
   border: 1px solid black;
-  border-radius: .5em;
+  border-radius: 0.5em;
 }
 
 .navbar-items button {
   border: 1px solid black;
   border-radius: 15%;
-  padding: .3em .5em .3em .5em;
+  padding: 0.3em 0.5em 0.3em 0.5em;
   width: 3em;
   font-size: 1em;
-  margin-left: .2em;
-  margin-right: .2em;
+  margin-left: 0.2em;
+  margin-right: 0.2em;
 }
 
 .navbar-items.search li:nth-child(2) {
