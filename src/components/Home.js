@@ -13,6 +13,7 @@ const Home = ({ categories, selectCat }) => {
     );
   });
 
+  console.log('home')
   return (
     <div className="outer-container center">
       <div className="inner-container front-page op0">

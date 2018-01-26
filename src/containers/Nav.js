@@ -66,6 +66,13 @@ class Nav extends Component {
     }
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      !(this.state.display === 'default' && nextState.display === "default") ||
+      !(this.state.showMenu === nextState.showMenu)
+    );
+  }
+
   render() {
     const { display, showMenu } = this.state;
     let navItemDisplay;
@@ -152,13 +159,10 @@ class Nav extends Component {
       "z-index": "1"
     };
 
+    console.log("Nav");
     return (
       <div>
-        {this.state.showMenu ? (
-          <MenuMain show={this.state.showMenu}/>
-        ) : (
-          ""
-        )}
+        {this.state.showMenu ? <MenuMain show={this.state.showMenu} /> : ""}
         <nav>{navItemDisplay}</nav>
       </div>
     );

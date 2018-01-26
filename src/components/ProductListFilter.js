@@ -24,6 +24,7 @@ const ProductListFilter = ({
     );
   });
 
+  console.log('prfil')
   return categoryList.length ? (
     <div
       className={`outer-container z10 ${

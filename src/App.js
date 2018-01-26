@@ -113,6 +113,7 @@ class App extends Component {
               products={this.state.products}
               selectedCats={this.state.selectedCats}
               showFilterMenu={this.handleClick}
+              filterMenuVisible={isVisible}
             />
           )}
         />
@@ -120,7 +121,6 @@ class App extends Component {
       </div>
     );
   }
-  ß;
 }
 
 export default App;

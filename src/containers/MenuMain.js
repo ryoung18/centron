@@ -89,6 +89,7 @@ class MenuMain extends Component {
       );
     });
 
+    console.log('Men')
     return listProducts.length ? (
       <div
         className={`outer-container z10 ${
