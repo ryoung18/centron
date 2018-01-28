@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../css/Nav.css";
 import { Link } from "react-router-dom";
 import MenuMain from "./MenuMain";
-import { setStateOnTimeOut, _setState } from "../utils/helpers";
+import { setStateOnTimeOut } from "../utils/helpers";
 
 class Nav extends Component {
   constructor(props) {
@@ -54,7 +54,6 @@ class Nav extends Component {
         result = `https://twitter.com/intent/tweet?text=Centron%20Life%20Products%20-%20Clavicle%20Supprt%20On%20Sale&url=https%3A%2F%2Fwww.centronlp.com%2Fclavicle%2Fhand&tsrc=twtr`;
         break;
       default:
-        "nope";
     }
 
     return result;
@@ -152,12 +151,6 @@ class Nav extends Component {
         </ul>
       );
     }
-
-    let styles = {
-      position: "absolute",
-      color: "black",
-      "z-index": "1"
-    };
 
     console.log("Nav");
     return (

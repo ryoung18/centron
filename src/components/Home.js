@@ -3,9 +3,9 @@ import "../css/Home.css";
 import { Link } from "react-router-dom";
 
 const Home = ({ categories, selectCat }) => {
-  let content = categories.map(category => {
+  let content = categories.map((category, i) => {
     return (
-      <li key={category}>
+      <li key={i}>
         <Link to="/product-list" onClick={selectCat} id={category}>
           {category}
         </Link>

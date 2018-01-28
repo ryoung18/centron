@@ -7,7 +7,10 @@ import Product from "./components/Product";
 import Nav from "./containers/Nav";
 import ProductList from "./components/ProductList";
 import ProductListFilter from "./components/ProductListFilter";
-import { _setState, ajaxRequest, setStateOnTimeOut } from "./utils/helpers";
+import { connect } from 'react-redux';
+import { fetchItems } from "./actions/productsActions";
+// import { ajaxRequest, setStateOnTimeOut } from "./utils/helpers";
+import { setStateOnTimeOut } from "./utils/helpers";
 
 class App extends Component {
   constructor(props) {
@@ -15,7 +18,6 @@ class App extends Component {
     this.state = {
       categories: [],
       selectedCats: new Set(),
-      products: [],
       filterMenu: {
         isVisible: 0
       },
@@ -26,14 +28,19 @@ class App extends Component {
     this.handleCategoryChange = this.handleCategoryChange.bind(this);
   }
 
-  componentDidMount() {
-    let newState = {
-      categories: ["Clavicle", "Hand Brace", "Sleeping Hand Brace", "Lumbar"],
-      products: ajaxRequest
-    };
+  // componentWillMount(){
+  //   this.props.dispatch(fetchItems)
+  //
+  // }
 
-    setStateOnTimeOut(this, newState); // simulate latency
+  componentDidMount() {
+    console.log('ppp',this.props.fetchItems(1))
+    console.log('ppp',this.props.fetchItems(1))
+    console.log('ppp',this.props.fetchItems(1))
+    console.log('ppp',this.props.fetchItems(1))
+    // this.setState({products: this.props.fetchItems().payload})
   }
+
 
   handleCategoryChange(event) {
     const { id } = event.currentTarget,
@@ -76,13 +83,10 @@ class App extends Component {
     }
   }
 
-  handlefilterCloseClick() {
-    //rerender ProductList component
-
-    setStateOnTimeOut(this);
-  }
 
   render() {
+
+    console.log(this)
     const { categories, selectedCats } = this.state,
       { isVisible } = this.state.filterMenu;
 
@@ -123,4 +127,9 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return state;
+};
+
+
+export default connect(mapStateToProps, { fetchItems })(App);
