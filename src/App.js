@@ -81,18 +81,22 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-
-    //hide ProductListFilter menu when changing to a different location path.
+    //hide ProductListFilter when exiting product-list path.
     if(prevProps.location.pathname === '/product-list' &&
       prevProps.history.location.pathname !== '/product-list' &&
       this.state.filterMenu.isVisible) {
       this.setState({ filterMenu: { isVisible: 0 } })
     }
+
+    if(prevProps.location.pathname === '/product-list' &&
+      prevProps.history.location.pathname !== '/product-list' &&
+      this.state.filterMenu.isVisible) {
+      this.setState({ filterMenu: { isVisible: 0 } })
+    }
+
   }
 
-
   render() {
-    console.log(this)
     const { selectedCats } = this.state,
       { isVisible } = this.state.filterMenu;
 

@@ -16,6 +16,7 @@ nav {
   list-style: none;
   font-size: 1em;
   justify-content: space-around;
+  min-height: 2.5em;
 }
 
 .navbar-items li {
