@@ -92,7 +92,7 @@ class MenuMain extends Component {
     console.log('Men')
     return listProducts.length ? (
       <div
-        className={`outer-container z20 ${
+        className={`outer-container z110 ${
           this.props.show === 1 ? "slide-right" : "slide-left"
         }`}
       >
