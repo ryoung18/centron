@@ -1,21 +1,21 @@
 import React, { Component } from "react";
 import "./css/App.css";
-import { Route } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import Product from "./components/Product";
 import Nav from "./containers/Nav";
 import ProductList from "./components/ProductList";
 import ProductListFilter from "./components/ProductListFilter";
-import { _setState, ajaxRequest, setStateOnTimeOut } from "./utils/helpers";
+import { connect } from 'react-redux';
+import { fetchItems } from "./actions/productsActions";
+import { ajaxRequest, setStateOnTimeOut } from "./utils/helpers";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      categories: [],
       selectedCats: new Set(),
-      products: [],
       filterMenu: {
         isVisible: 0
       },
@@ -26,13 +26,9 @@ class App extends Component {
     this.handleCategoryChange = this.handleCategoryChange.bind(this);
   }
 
-  componentDidMount() {
-    let newState = {
-      categories: ["Clavicle", "Hand Brace", "Sleeping Hand Brace", "Lumbar"],
-      products: ajaxRequest
-    };
-
-    setStateOnTimeOut(this, newState); // simulate latency
+  componentWillMount() {
+    this.props.fetchItems()
+    // this.setState({...this.state, ...ajaxRequest})
   }
 
   handleCategoryChange(event) {
@@ -40,11 +36,19 @@ class App extends Component {
       { pathname } = event.view.location,
       { selectedCats } = this.state;
 
-    if (pathname === "/") {
-      this.setState({ selectedCats: new Set([id]) });
+
+    //events from Home
+    if(id === "All") {
+      this.setState({ selectedCats: new Set() });
       return;
     }
 
+    if (pathname === "/") {
+      this.setState({ selectedCats: new Set([id])});
+      return;
+    }
+
+    //events from ProductListFilter
     let newSelected = new Set(selectedCats);
 
     if (selectedCats.has(id)) {
@@ -76,14 +80,24 @@ class App extends Component {
     }
   }
 
-  handlefilterCloseClick() {
-    //rerender ProductList component
+  componentDidUpdate(prevProps, prevState) {
+    //hide ProductListFilter when exiting product-list path.
+    if(prevProps.location.pathname === '/product-list' &&
+      prevProps.history.location.pathname !== '/product-list' &&
+      this.state.filterMenu.isVisible) {
+      this.setState({ filterMenu: { isVisible: 0 } })
+    }
 
-    setStateOnTimeOut(this);
+    if(prevProps.location.pathname === '/product-list' &&
+      prevProps.history.location.pathname !== '/product-list' &&
+      this.state.filterMenu.isVisible) {
+      this.setState({ filterMenu: { isVisible: 0 } })
+    }
+
   }
 
   render() {
-    const { categories, selectedCats } = this.state,
+    const { selectedCats } = this.state,
       { isVisible } = this.state.filterMenu;
 
     return (
@@ -92,7 +106,7 @@ class App extends Component {
         <Nav />
         {isVisible ? (
           <ProductListFilter
-            categories={categories}
+            categories={this.props.categories}
             selectedCats={selectedCats}
             filterClose={this.handleClick}
             selectCat={this.handleCategoryChange}
@@ -104,23 +118,40 @@ class App extends Component {
         <Route
           exact
           path="/"
-          render={() => <Home selectCat={this.handleCategoryChange} />}
+          render={(props) =>{
+            return <Home
+              selectCat={this.handleCategoryChange}
+              location={props.location}
+            /> } }
         />
         <Route
           path="/product-list"
-          render={() => (
-            <ProductList
-              products={this.state.products}
+          render={(props) => {
+            return <ProductList
+              location={props.location}
+              fetched={this.props.fetched}
+              products={this.props.products}
               selectedCats={this.state.selectedCats}
               showFilterMenu={this.handleClick}
+              filterMenuVisible={isVisible}
             />
-          )}
+          }}
         />
         <Route path="/product" component={Product} />
       </div>
     );
   }
-  ß;
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  const { fetching, fetched, categories, products } = state.products;
+  return {
+    fetching,
+    fetched,
+    categories,
+    products,
+  };
+};
+
+// export default App
+export default withRouter(connect(mapStateToProps, { fetchItems })(App))

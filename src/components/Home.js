@@ -2,11 +2,11 @@ import React from "react";
 import "../css/Home.css";
 import { Link } from "react-router-dom";
 
-const Home = ({ categories, selectCat }) => {
-  let content = categories.map(category => {
+const Home = ({ categories, selectCat } ) => {
+  let content = categories.map((category, i) => {
     return (
-      <li key={category}>
-        <Link to="/product-list" onClick={selectCat} id={category}>
+      <li key={i}>
+        <Link to="/product-list" onClick={selectCat} id={category} >
           {category}
         </Link>
       </li>
@@ -25,7 +25,7 @@ const Home = ({ categories, selectCat }) => {
 
       <div className="inner-container center front-page">
         <div className="mosaic">
-          <Link to="/product-list" onClick={() => selectCat(new Set())}>
+          <Link to="/product-list" onClick={selectCat} id='All'>
             <div className="above-mosaic">Show All Items</div>
           </Link>
           <ul>{content}</ul>

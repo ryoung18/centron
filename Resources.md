@@ -30,3 +30,5 @@ https://hackernoon.com/how-to-fix-the-ios-11-input-element-in-fixed-modals-bug-a
 https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-blocking-css
 
 http://www.chanderdhall.com/webcasts
+
+https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/blocked-updates.md //fixed issue with redux not allowing for react router to render next link.

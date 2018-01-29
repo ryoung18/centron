@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../css/Nav.css";
 import { Link } from "react-router-dom";
 import MenuMain from "./MenuMain";
-import { setStateOnTimeOut, _setState } from "../utils/helpers";
+import { setStateOnTimeOut } from "../utils/helpers";
 
 class Nav extends Component {
   constructor(props) {
@@ -28,7 +28,6 @@ class Nav extends Component {
 
     if (id === "menu") {
       this.setState({ showMenu: this.state.showMenu + 1 });
-
       if (this.state.showMenu === 1) {
         setStateOnTimeOut(this, { showMenu: 0 });
       }
@@ -54,7 +53,6 @@ class Nav extends Component {
         result = `https://twitter.com/intent/tweet?text=Centron%20Life%20Products%20-%20Clavicle%20Supprt%20On%20Sale&url=https%3A%2F%2Fwww.centronlp.com%2Fclavicle%2Fhand&tsrc=twtr`;
         break;
       default:
-        "nope";
     }
 
     return result;
@@ -66,13 +64,20 @@ class Nav extends Component {
     }
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      !(this.state.display === 'default' && nextState.display === "default") ||
+      !(this.state.showMenu === nextState.showMenu)
+    );
+  }
+
   render() {
     const { display, showMenu } = this.state;
     let navItemDisplay;
 
     if (display === "default") {
       navItemDisplay = (
-        <ul className="navbar-items default">
+        <ul className="navbar-items">
           <li onClick={this.handleClick} id="menu">
             <img src="svgs/menu-icon.svg" alt="menu" />
           </li>
@@ -146,19 +151,10 @@ class Nav extends Component {
       );
     }
 
-    let styles = {
-      position: "absolute",
-      color: "black",
-      "z-index": "1"
-    };
-
+    console.log("Nav");
     return (
       <div>
-        {this.state.showMenu ? (
-          <MenuMain show={this.state.showMenu}/>
-        ) : (
-          ""
-        )}
+        {this.state.showMenu ? <MenuMain show={this.state.showMenu} /> : ""}
         <nav>{navItemDisplay}</nav>
       </div>
     );
