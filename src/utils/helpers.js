@@ -1,3 +1,5 @@
+export const BASE_URL = 'http://localhost:3001';
+
 export const setStateOnTimeOut = (context, newState, time = 1000) => {
   setTimeout(() => {
     _setState(context, newState);
@@ -9,7 +11,9 @@ export const _setState = (context, newState) => {
 };
 
 //will remove after implementing redux
-export const ajaxRequest = [
+export const ajaxRequest = {
+  categories: ['Clavicle', 'Hand Brace', 'Sleeping Hand Brace', 'Ankle', 'Foot', 'Lumbar'],
+  products: [
   {
     id: 1,
     type: "Hand Brace",
@@ -87,4 +91,4 @@ export const ajaxRequest = [
     amazonUrl: "http://amazon.com",
     img: "https://i.ebayimg.com/images/g/hnwAAOSw~oFXI~Yj/s-l1600.jpg"
   }
-];
+]}

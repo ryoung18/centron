@@ -9,14 +9,12 @@ import ProductList from "./components/ProductList";
 import ProductListFilter from "./components/ProductListFilter";
 import { connect } from 'react-redux';
 import { fetchItems } from "./actions/productsActions";
-// import { ajaxRequest, setStateOnTimeOut } from "./utils/helpers";
 import { setStateOnTimeOut } from "./utils/helpers";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      categories: [],
       selectedCats: new Set(),
       filterMenu: {
         isVisible: 0
@@ -28,19 +26,9 @@ class App extends Component {
     this.handleCategoryChange = this.handleCategoryChange.bind(this);
   }
 
-  // componentWillMount(){
-  //   this.props.dispatch(fetchItems)
-  //
-  // }
-
-  componentDidMount() {
-    console.log('ppp',this.props.fetchItems(1))
-    console.log('ppp',this.props.fetchItems(1))
-    console.log('ppp',this.props.fetchItems(1))
-    console.log('ppp',this.props.fetchItems(1))
-    // this.setState({products: this.props.fetchItems().payload})
+  componentWillMount() {
+    this.props.fetchItems()
   }
-
 
   handleCategoryChange(event) {
     const { id } = event.currentTarget,
@@ -86,8 +74,8 @@ class App extends Component {
 
   render() {
 
-    console.log(this)
-    const { categories, selectedCats } = this.state,
+    console.log('app', this)
+    const { selectedCats } = this.state,
       { isVisible } = this.state.filterMenu;
 
     return (
@@ -96,7 +84,7 @@ class App extends Component {
         <Nav />
         {isVisible ? (
           <ProductListFilter
-            categories={categories}
+            categories={this.props.categories}
             selectedCats={selectedCats}
             filterClose={this.handleClick}
             selectCat={this.handleCategoryChange}
@@ -114,7 +102,8 @@ class App extends Component {
           path="/product-list"
           render={() => (
             <ProductList
-              products={this.state.products}
+              fetched={this.props.fetched}
+              products={this.props.products}
               selectedCats={this.state.selectedCats}
               showFilterMenu={this.handleClick}
               filterMenuVisible={isVisible}
@@ -128,7 +117,13 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return state;
+  const { fetching, fetched, categories, products } = state.products;
+  return {
+    fetching,
+    fetched,
+    categories,
+    products,
+  };
 };
 
 

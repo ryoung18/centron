@@ -1,17 +1,28 @@
-import { FETCH_ITEMS } from '../actions/productsActions';
+import {
+  FETCH_ITEMS_START,
+  FETCH_ITEMS_ERROR,
+  RECEIVE_ITEMS
+} from "../actions/productsActions";
 
-const DEFAULT_STATE = {count: 0};
+const DEFAULT_STATE = {
+  fetching: false,
+  fetched: false,
+  error: null,
+  categories: [],
+  products: []
+};
 
-export default function products(state = DEFAULT_STATE, action={}) {
+export default function products(state = DEFAULT_STATE, action = {}) {
   switch (action.type) {
-    case FETCH_ITEMS: {
-      console.log('hey', action)
-      let hey = {...state, count: state.count + action.payload };
+    case FETCH_ITEMS_START:
+      return { ...state, fetching: true };
 
-      console.log('ssss', state)
-      console.log('ssiiiss', hey)
-      return hey
-    }
+    case FETCH_ITEMS_ERROR:
+      return { ...state, fetching: false, error: null };
+
+    case RECEIVE_ITEMS:
+      return { ...state, fetching: false, fetched: true, ...action.payload };
+
     default:
       return state;
   }

@@ -28,8 +28,8 @@ class MenuMain extends Component {
         img:
           "http://piratevinyldecals.com/wps/wp-content/uploads/2014/01/Hello-Kitty-Winking-pv183.png"
       },
-      categories: ["Clavicle", "Hand Brace", "Sleeping Hand Brace", "Lumbar"],
-      products: ajaxRequest
+      categories: ajaxRequest.categories,
+      products: ajaxRequest.products
     };
 
     setStateOnTimeOut(this, newState);
