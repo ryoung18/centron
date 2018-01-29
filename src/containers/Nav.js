@@ -28,7 +28,6 @@ class Nav extends Component {
 
     if (id === "menu") {
       this.setState({ showMenu: this.state.showMenu + 1 });
-
       if (this.state.showMenu === 1) {
         setStateOnTimeOut(this, { showMenu: 0 });
       }
@@ -78,7 +77,7 @@ class Nav extends Component {
 
     if (display === "default") {
       navItemDisplay = (
-        <ul className="navbar-items default">
+        <ul className="navbar-items">
           <li onClick={this.handleClick} id="menu">
             <img src="svgs/menu-icon.svg" alt="menu" />
           </li>

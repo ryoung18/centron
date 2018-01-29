@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./css/App.css";
-import { Route } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import Product from "./components/Product";
@@ -9,7 +9,7 @@ import ProductList from "./components/ProductList";
 import ProductListFilter from "./components/ProductListFilter";
 import { connect } from 'react-redux';
 import { fetchItems } from "./actions/productsActions";
-import { setStateOnTimeOut } from "./utils/helpers";
+import { ajaxRequest, setStateOnTimeOut } from "./utils/helpers";
 
 class App extends Component {
   constructor(props) {
@@ -28,6 +28,7 @@ class App extends Component {
 
   componentWillMount() {
     this.props.fetchItems()
+    // this.setState({...this.state, ...ajaxRequest})
   }
 
   handleCategoryChange(event) {
@@ -35,11 +36,19 @@ class App extends Component {
       { pathname } = event.view.location,
       { selectedCats } = this.state;
 
-    if (pathname === "/") {
-      this.setState({ selectedCats: new Set([id]) });
+
+    //events from Home
+    if(id === "All") {
+      this.setState({ selectedCats: new Set() });
       return;
     }
 
+    if (pathname === "/") {
+      this.setState({ selectedCats: new Set([id])});
+      return;
+    }
+
+    //events from ProductListFilter
     let newSelected = new Set(selectedCats);
 
     if (selectedCats.has(id)) {
@@ -71,10 +80,19 @@ class App extends Component {
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+
+    //hide ProductListFilter menu when changing to a different location path.
+    if(prevProps.location.pathname === '/product-list' &&
+      prevProps.history.location.pathname !== '/product-list' &&
+      this.state.filterMenu.isVisible) {
+      this.setState({ filterMenu: { isVisible: 0 } })
+    }
+  }
+
 
   render() {
-
-    console.log('app', this)
+    console.log(this)
     const { selectedCats } = this.state,
       { isVisible } = this.state.filterMenu;
 
@@ -96,19 +114,24 @@ class App extends Component {
         <Route
           exact
           path="/"
-          render={() => <Home selectCat={this.handleCategoryChange} />}
+          render={(props) =>{
+            return <Home
+              selectCat={this.handleCategoryChange}
+              location={props.location}
+            /> } }
         />
         <Route
           path="/product-list"
-          render={() => (
-            <ProductList
+          render={(props) => {
+            return <ProductList
+              location={props.location}
               fetched={this.props.fetched}
               products={this.props.products}
               selectedCats={this.state.selectedCats}
               showFilterMenu={this.handleClick}
               filterMenuVisible={isVisible}
             />
-          )}
+          }}
         />
         <Route path="/product" component={Product} />
       </div>
@@ -126,5 +149,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-
-export default connect(mapStateToProps, { fetchItems })(App);
+// export default App
+export default withRouter(connect(mapStateToProps, { fetchItems })(App))

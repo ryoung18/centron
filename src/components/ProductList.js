@@ -23,6 +23,7 @@ class ProductList extends Component {
       ebaySvg
     } = this.props;
 
+    console.log('plis', products)
     let filteredProducts = selectedCats.size
       ? products.filter(product => selectedCats.has(product.type))
       : products;
@@ -57,7 +58,7 @@ class ProductList extends Component {
       );
     });
 
-    console.log("prlist");
+    console.log("prlist", this);
     return listProducts.length ? (
       <div className="product-list">
         <div className="outer-container z5 slide-up">

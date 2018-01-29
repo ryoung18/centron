@@ -20,6 +20,7 @@ nav {
 
 .navbar-items li {
   align-self: center;
+  cursor: pointer;
 }
 
 .navbar-items > li img {
