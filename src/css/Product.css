@@ -6,3 +6,42 @@
   border-radius: 0.4em;
   margin: auto;
 }
+
+.product-images img {
+  width: 100%
+}
+
+.product-title {
+  text-align: center;
+  margin: 1em 0 1em;
+}
+
+.stores img{
+  height: 2em;
+  margin-right: 2em;
+}
+
+.stores li {
+  display: flex;
+  align-items: center;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.stores a {
+  margin-right: 2em;
+  border: 1px solid black;
+  border-radius: .3em;
+  font-size: .8em;
+  padding: .5em;
+  background: lightgray;
+}
+
+.stores {
+  display: flex;
+  justify-content: center;
+}
+
+.stores ul {
+  width: 800px;
+}

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../css/Nav.css";
 import { Link } from "react-router-dom";
 import MenuMain from "./MenuMain";
+import { BASE_URL } from "../utils/helpers";
 import { setStateOnTimeOut } from "../utils/helpers";
 
 class Nav extends Component {
@@ -79,15 +80,15 @@ class Nav extends Component {
       navItemDisplay = (
         <ul className="navbar-items">
           <li onClick={this.handleClick} id="menu">
-            <img src="svgs/menu-icon.svg" alt="menu" />
+            <img src={`${BASE_URL}/svgs/menu-icon.svg`} alt="menu" />
           </li>
           <li onClick={this.handleClick} id="default">
             <Link to="/">
-              <img src="svgs/home-icon.svg" alt="home" />
+              <img src={`${BASE_URL}/svgs/home-icon.svg`} alt="home" />
             </Link>
           </li>
           <li onClick={this.handleClick} id="search">
-            <img src="svgs/search-icon.svg" alt="search" />
+            <img src={`${BASE_URL}/svgs/search-icon.svg`} alt="search" />
           </li>
           <li onClick={this.handleClick} id="default">
             <a
@@ -95,7 +96,7 @@ class Nav extends Component {
             >
               <img
                 className="circle-btn"
-                src="svgs/email-icon.svg"
+                src={`${BASE_URL}/svgs/email-icon.svg`}
                 alt="mail"
               />
             </a>
@@ -106,7 +107,7 @@ class Nav extends Component {
             >
               <img
                 className="circle-btn"
-                src="svgs/twitter-icon.svg"
+                src={`${BASE_URL}/svgs/twitter-icon.svg`}
                 alt="twitter"
               />
             </a>
@@ -119,7 +120,7 @@ class Nav extends Component {
       navItemDisplay = (
         <ul className="navbar-items search">
           <li id="menu">
-            <img src="svgs/search-icon.svg" alt="search" />
+            <img src={`${BASE_URL}/svgs/search-icon.svg`} alt="search" />
           </li>
           <li>
             <input

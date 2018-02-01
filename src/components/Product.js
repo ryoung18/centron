@@ -1,80 +1,79 @@
-import React from "react";
+import React, { Component } from "react";
+import axios from "axios";
 import "../css/Product.css";
+import { API_URL, BASE_URL } from "../utils/helpers";
 
-const Product = () => (
-  <div className="outer-container slide-up hide">
-    <div className="menu">
-      <a
-        href="https://www.amazon.com/Centron-Adjustable-Clavicle-Shoulder/dp/B0116OQSNG/ref=lp_13672226011_1_9_a_it?srs=13672226011&ie=UTF8&qid=1514101680&sr=8-9"
-        className="space w50"
-      >
-        <h2> Amazon $12 </h2>
-      </a>
+class Product extends Component {
+  constructor(props) {
+    super(props)
 
-      <a
-        href="https://www.ebay.com/itm/Centron-Adjustable-Clavicle-Strap-Shoulder-Support-Brace/222658726903?epid=1572203358&hash=item33d77e8bf7:m:mL4ejt7R2RzfhuCzqTwKyJg"
-        className="space w50"
-      >
-        <h2> eBay $8 </h2>
-      </a>
-    </div>
+    this.state = {
+      products: {},
+      fetched: false
+    }
+  }
 
-    <div className="inner-container inner-padding">
-      <div className="product-images">
-        <img
-          src="https://i.ebayimg.com/images/g/kWYAAOSwYmZXI9kt/s-l1600.jpg"
-          alt="clavicl brace"
-        />
+  componentDidMount() {
+    axios
+      .get(`${API_URL}/api/products/${this.props.match.params.item}`)
+      .then((data) => {
+        this.setState({products: data.data.products[0], fetched: true})
+      })
+      .catch( err => console.log('error', err))
+  }
+
+  render() {
+    const { products } = this.state;
+    let storeLinks = {};
+
+    if(this.state.fetched) {
+      products.stores.forEach(item => {
+        let button = ( <a href={item.url}> {item.size} ${item.price} </a> );
+
+        if(storeLinks[item.name]) {
+          storeLinks[item.name].push(button);
+        } else {
+          storeLinks[item.name] = [button];
+        }
+      })
+    }
+
+
+    console.log(storeLinks)
+
+
+    return (<div className="outer-container slide-up">
+      <div className="inner-container inner-padding">
+        <div className="product-images">
+          <img
+            src="https://i.ebayimg.com/images/g/kWYAAOSwYmZXI9kt/s-l1600.jpg"
+            alt="clavicl brace"
+          />
+        </div>
+        <div className="product-title">
+          <p> Clavicle Strap Shoulder Support Brace </p>
+        </div>
+        <div className="stores" >
+          <ul>
+            <li>
+              <img src={`${BASE_URL}/svgs/amazon-icon.svg`} /> {storeLinks.Amazon}
+            </li>
+            <li>
+              <img src={`${BASE_URL}/svgs/ebay-icon.svg`} /> {storeLinks.ebay}
+            </li>
+          </ul>
+
+        </div>
+        <ul>
+          <li>
+            {products.description}
+          </li>
+        </ul>
+
+        <div className="bottom-spacing"> asdasd </div>
       </div>
-      <div className="product-title-scroll">
-        <p> Clavicle Strap Shoulder Support Brace </p>
-      </div>
-      <ul>
-        <li>
-          Engineering designed to help prevent shoulder slump and minimize
-          movement while treating clavicular fractures.
-        </li>
-        <li>
-          Foam padded hoop and loop closure straps provide proper fit and
-          maintain even support.
-        </li>
-        <li>Features positional D-rings for proper adjustment.</li>
-        <li>Ideal for people with extended use of a computer.</li>
-        <li>
-          Engineering designed to help prevent shoulder slump and minimize
-          movement while treating clavicular fractures.
-        </li>
-        <li>
-          Foam padded hoop and loop closure straps provide proper fit and
-          maintain even support.
-        </li>
-        <li>Features positional D-rings for proper adjustment.</li>
-        <li>Ideal for people with extended use of a computer.</li>
-        <li>
-          Engineering designed to help prevent shoulder slump and minimize
-          movement while treating clavicular fractures.
-        </li>
-        <li>
-          Foam padded hoop and loop closure straps provide proper fit and
-          maintain even support.
-        </li>
-        <li>Features positional D-rings for proper adjustment.</li>
-        <li>Ideal for people with extended use of a computer.</li>
-        <li>
-          Engineering designed to help prevent shoulder slump and minimize
-          movement while treating clavicular fractures.
-        </li>
-        <li>
-          Foam padded hoop and loop closure straps provide proper fit and
-          maintain even support.
-        </li>
-        <li>Features positional D-rings for proper adjustment.</li>
-        <li>last Ideal for people with extended use of a computer.</li>
-      </ul>
+    </div>)
+  }
+};
 
-      <div className="bottom-spacing"> asdasd </div>
-    </div>
-  </div>
-);
-
-export default Product;
+export default Product

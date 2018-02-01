@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "../css/MenuMain.css";
 import LoadingScreen from "../components/LoadingScreen";
+import { connect } from "react-redux";
+import { fetchItems } from "../actions/productsActions";
 import { setStateOnTimeOut, ajaxRequest } from "../utils/helpers";
 
 class MenuMain extends Component {
@@ -10,10 +12,7 @@ class MenuMain extends Component {
     this.state = {
       selectedBtn: this.props.menuBtns[0],
       loaded: false,
-      user: {},
-      products: [],
-      categories: [],
-      img: ""
+      user: {}
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -42,33 +41,33 @@ class MenuMain extends Component {
   }
 
   render() {
-    let listProducts = this.state.products.map(product => {
-      let displayPrice = site => `$${site[0]} - $${site[1]}`;
-      let displaySvg = svg => `svgs/${svg}`;
+    console.log(products)
+    const { products, heartSvg,
+      ebaySvg } = this.props;
 
+    let listProducts = products.map(product => {
       return (
-        <div className="line-container" key={product.id}>
+        <div className="line-container" key={product.partNumber}>
           <div className="item-image">
-            <img src={product.img} alt={product.title} />
+            <img src={product.images} alt="item" />
           </div>
 
           <div className="item-info-container">
             <div className="item-description">
-              <h4> aa {product.title} </h4>
+              <h4> {product.title} </h4>
               <p> {product.partNumber}</p>
               <span className="slide-indicator" />
             </div>
             <div className="btns-hidden-container">
-              <a href={product.amazonUrl}>
-                <img
-                  src={displaySvg(this.props.amazonSvg)}
-                  alt="link to amazon"
-                />
-                <p> {displayPrice(product.amazonPrice)} </p>
+              <a href={product.stores[0].url}>
+                <span className="circleBtn">
+                  <img src={`svgs/${heartSvg}`} alt="favorite" />
+                </span>
               </a>
-              <a href={product.ebayUrl}>
-                <img src={displaySvg(this.props.ebaySvg)} alt="link to ebay" />
-                <p> {displayPrice(product.ebayPrice)} </p>
+              <a href={product.stores[1].url}>
+                <span className="circleBtn">
+                  <img src={`svgs/${ebaySvg}`} alt="ebay" />
+                </span>
               </a>
             </div>
           </div>
@@ -89,7 +88,7 @@ class MenuMain extends Component {
       );
     });
 
-    console.log('Men')
+    console.log("Men");
     return listProducts.length ? (
       <div
         className={`outer-container z110 ${
@@ -120,9 +119,20 @@ class MenuMain extends Component {
   }
 }
 
-export default MenuMain;
+const mapStateToProps = state => {
+  const { fetching, fetched, categories, products } = state.products;
+  return {
+    fetching,
+    fetched,
+    categories,
+    products
+  };
+};
+
+export default connect(mapStateToProps, { fetchItems })(MenuMain);
 
 MenuMain.defaultProps = {
+  heartSvg: "heart-icon.svg",
   amazonSvg: "amazon-icon.svg",
   ebaySvg: "ebay-icon.svg",
   menuBtns: ["Favorites", "Messages", "Settings"],

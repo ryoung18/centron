@@ -13,26 +13,29 @@ export function fetchItems(products) {
 
   return dispatch => {
     dispatch({ type: FETCH_ITEMS_START });
-    // axios
-    //   .get(`${BASE_URL}/api/products`)
-    //   .then(data => {
-    //     dispatch({
-    //       type: RECEIVE_ITEMS,
-    //       payload: data
-    //     });
-    //   })
-    //   .catch(error => {
-    //     dispatch({
-    //       type: FETCH_ITEMS_ERROR,
-    //       payload: error
-    //     });
-    //   });
-    setTimeout(() => {
-      dispatch({
-        type: RECEIVE_ITEMS,
-        payload: ajaxRequest
+    axios
+      // .get(`${BASE_URL}/api/products`)
+      .get('http://localhost:3001/api/products')
+      .then(data => {
+        dispatch({
+          type: RECEIVE_ITEMS,
+          payload: data.data
+        });
+      })
+      .catch(error => {
+        console.log('ssssaaa', error)
+        dispatch({
+          type: FETCH_ITEMS_ERROR,
+          payload: error
+        });
       });
-    }, 2000);
+
+    // setTimeout(() => {
+    //   dispatch({
+    //     type: RECEIVE_ITEMS,
+    //     payload: ajaxRequest
+    //   });
+    // }, 2000);
 
 
   };

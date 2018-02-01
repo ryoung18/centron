@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "../css/ProductList.css";
 import LoadingScreen from "../components/LoadingScreen";
 
@@ -24,14 +25,16 @@ class ProductList extends Component {
     } = this.props;
 
     let filteredProducts = selectedCats.size
-      ? products.filter(product => selectedCats.has(product.type))
+      ? products.filter(product => selectedCats.has(product.category))
       : products;
 
     let listProducts = filteredProducts.map(product => {
       return (
         <div className="line-container" key={product.partNumber}>
           <div className="item-image">
-            <img src={product.img} alt="item" />
+            <Link to={`/products/${product.partNumber}`}>
+              <img src={product.images} alt="item" />
+            </Link>
           </div>
 
           <div className="item-info-container">
@@ -41,12 +44,12 @@ class ProductList extends Component {
               <span className="slide-indicator" />
             </div>
             <div className="btns-hidden-container">
-              <a href={product.amazonUrl}>
+              <a href={product.stores[0].url}>
                 <span className="circleBtn">
                   <img src={`svgs/${heartSvg}`} alt="favorite" />
                 </span>
               </a>
-              <a href={product.ebayUrl}>
+              <a href={product.stores[1].url}>
                 <span className="circleBtn">
                   <img src={`svgs/${ebaySvg}`} alt="ebay" />
                 </span>

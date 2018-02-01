@@ -1,4 +1,5 @@
-export const BASE_URL = 'http://localhost:3001';
+export const BASE_URL = 'http://localhost:3000';
+export const API_URL = 'http://localhost:3001';
 
 export const setStateOnTimeOut = (context, newState, time = 1000) => {
   setTimeout(() => {
@@ -23,7 +24,7 @@ export const ajaxRequest = {
     ebayUrl: "http://ebay.com",
     amazonPrice: [15, 20],
     amazonUrl: "http://amazon.com",
-    img: "https://i.ebayimg.com/images/g/hnwAAOSw~oFXI~Yj/s-l1600.jpg"
+    images: "https://i.ebayimg.com/images/g/hnwAAOSw~oFXI~Yj/s-l1600.jpg"
   },
   {
     id: 2,
@@ -34,7 +35,7 @@ export const ajaxRequest = {
     ebayUrl: "http://ebay.com",
     amazonPrice: [15, 20],
     amazonUrl: "http://amazon.com",
-    img: "https://i.ebayimg.com/images/g/hnwAAOSw~oFXI~Yj/s-l1600.jpg"
+    images: "https://i.ebayimg.com/images/g/hnwAAOSw~oFXI~Yj/s-l1600.jpg"
   },
   {
     id: 3,
@@ -45,7 +46,7 @@ export const ajaxRequest = {
     ebayUrl: "http://ebay.com",
     amazonPrice: [15, 20],
     amazonUrl: "http://amazon.com",
-    img: "https://i.ebayimg.com/images/g/hnwAAOSw~oFXI~Yj/s-l1600.jpg"
+    images: "https://i.ebayimg.com/images/g/hnwAAOSw~oFXI~Yj/s-l1600.jpg"
   },
   {
     id: 4,
@@ -56,7 +57,7 @@ export const ajaxRequest = {
     ebayUrl: "http://ebay.com",
     amazonPrice: [15, 20],
     amazonUrl: "http://amazon.com",
-    img: "https://i.ebayimg.com/images/g/hnwAAOSw~oFXI~Yj/s-l1600.jpg"
+    images: "https://i.ebayimg.com/images/g/hnwAAOSw~oFXI~Yj/s-l1600.jpg"
   },
   {
     id: 5,
@@ -67,7 +68,7 @@ export const ajaxRequest = {
     ebayUrl: "http://ebay.com",
     amazonPrice: [15, 20],
     amazonUrl: "http://amazon.com",
-    img: "https://i.ebayimg.com/images/g/hnwAAOSw~oFXI~Yj/s-l1600.jpg"
+    images: "https://i.ebayimg.com/images/g/hnwAAOSw~oFXI~Yj/s-l1600.jpg"
   },
   {
     id: 6,
@@ -78,7 +79,7 @@ export const ajaxRequest = {
     ebayUrl: "http://ebay.com",
     amazonPrice: [15, 20],
     amazonUrl: "http://amazon.com",
-    img: "https://i.ebayimg.com/images/g/hnwAAOSw~oFXI~Yj/s-l1600.jpg"
+    images: "https://i.ebayimg.com/images/g/hnwAAOSw~oFXI~Yj/s-l1600.jpg"
   },
   {
     id: 7,
@@ -89,6 +90,29 @@ export const ajaxRequest = {
     ebayUrl: "http://ebay.com",
     amazonPrice: [15, 20],
     amazonUrl: "http://amazon.com",
-    img: "https://i.ebayimg.com/images/g/hnwAAOSw~oFXI~Yj/s-l1600.jpg"
+    images: "https://i.ebayimg.com/images/g/hnwAAOSw~oFXI~Yj/s-l1600.jpg"
   }
 ]}
+
+
+// {
+//     item: {
+//       category: "Hand Brace",
+//       partNumber: "hik1029",
+//       title: "Hand Brace Strap Shoulder Support Brace",
+//       images: "https://i.ebayimg.com/images/g/hnwAAOSw~oFXI~Yj/s-l1600.jpg"
+//     },
+//     stores: [
+//       {
+//         name: "Amazon",
+//         size: "Small",
+//         price: 11,
+//         url: "http://amazon.com"
+//       },
+//       {
+//         name: "ebay",
+//         size: "Small",
+//         price: 12,
+//         url: "http://amazon.com"
+//       }
+//     ]

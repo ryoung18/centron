@@ -10,10 +10,13 @@ import thunk from "redux-thunk";
 import { BrowserRouter } from "react-router-dom";
 import registerServiceWorker from "./registerServiceWorker";
 
-const store = createStore(
-  reducer,
-  compose(applyMiddleware(thunk), composeWithDevTools())
-);
+
+//Chrome extension running on unsupport browser causes issue.
+const availableMiddleware = window.navigator.userAgent.includes("Chrome")
+  ? compose(applyMiddleware(thunk), composeWithDevTools())
+  : compose(applyMiddleware(thunk));
+
+const store = createStore(reducer, availableMiddleware);
 
 ReactDOM.render(
   <Provider store={store}>

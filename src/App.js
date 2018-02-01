@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import "./css/App.css";
-import { Route, withRouter } from "react-router-dom";
+import { Route, withRouter, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import Product from "./components/Product";
+import Login from "./components/Login";
 import Nav from "./containers/Nav";
 import ProductList from "./components/ProductList";
 import ProductListFilter from "./components/ProductListFilter";
 import { connect } from 'react-redux';
 import { fetchItems } from "./actions/productsActions";
-import { ajaxRequest, setStateOnTimeOut } from "./utils/helpers";
+import { setStateOnTimeOut } from "./utils/helpers";
 
 class App extends Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class App extends Component {
       filterMenu: {
         isVisible: 0
       },
-      favoritedItems: new Set()
+      favoritedItems: ['hik1022','hik1024','hik1027']
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -97,6 +98,7 @@ class App extends Component {
   }
 
   render() {
+    // console.log('App', this.state, this.props)
     const { selectedCats } = this.state,
       { isVisible } = this.state.filterMenu;
 
@@ -115,35 +117,39 @@ class App extends Component {
         ) : (
           ""
         )}
-        <Route
-          exact
-          path="/"
-          render={(props) =>{
-            return <Home
-              selectCat={this.handleCategoryChange}
-              location={props.location}
-            /> } }
-        />
-        <Route
-          path="/product-list"
-          render={(props) => {
-            return <ProductList
-              location={props.location}
-              fetched={this.props.fetched}
-              products={this.props.products}
-              selectedCats={this.state.selectedCats}
-              showFilterMenu={this.handleClick}
-              filterMenuVisible={isVisible}
-            />
-          }}
-        />
-        <Route path="/product" component={Product} />
+        <Switch>
+          <Route path="/login" component={Login} />
+          <Route
+            exact
+            path="/"
+            render={(props) =>{
+              return <Home
+                selectCat={this.handleCategoryChange}
+                location={props.location}
+              /> } }
+          />
+          <Route path="/products/:item" component={Product} />
+          <Route
+            path="/products"
+            render={(props) => {
+              return <ProductList
+                location={props.location}
+                fetched={this.props.fetched}
+                products={this.props.products}
+                selectedCats={this.state.selectedCats}
+                showFilterMenu={this.handleClick}
+                filterMenuVisible={isVisible}
+              />
+            }}
+          />
+        </Switch>
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
+  console.log('ssss', state)
   const { fetching, fetched, categories, products } = state.products;
   return {
     fetching,
@@ -153,5 +159,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-// export default App
 export default withRouter(connect(mapStateToProps, { fetchItems })(App))

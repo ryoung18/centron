@@ -1,0 +1,30 @@
+.access-form {
+  /*border: 1px solid black;*/
+  width: 15em;
+}
+
+.access-form li {
+  list-style: none;
+}
+
+.access-form ul.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.access-form .buttons li {
+  padding: .5em;
+  width: 48%;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: .3em;
+}
+
+.form-inputs input {
+  border: 1px solid black;
+  margin-top: 2em;
+  height: 2em;
+  width: 100%;
+  font-size: 1em;
+  border-radius: .3em;
+}

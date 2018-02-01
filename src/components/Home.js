@@ -6,7 +6,7 @@ const Home = ({ categories, selectCat } ) => {
   let content = categories.map((category, i) => {
     return (
       <li key={i}>
-        <Link to="/product-list" onClick={selectCat} id={category} >
+        <Link to="/products" onClick={selectCat} id={category} >
           {category}
         </Link>
       </li>
@@ -25,9 +25,12 @@ const Home = ({ categories, selectCat } ) => {
 
       <div className="inner-container center front-page">
         <div className="mosaic">
-          <Link to="/product-list" onClick={selectCat} id='All'>
-            <div className="above-mosaic">Show All Items</div>
+          <Link to="/login">
+            <div className="above-mosaic">Log In</div>
           </Link>
+          {/* <Link to="/products" onClick={selectCat} id='All'>
+            <div className="above-mosaic">Show All Items</div>
+          </Link> */}
           <ul>{content}</ul>
         </div>
       </div>
